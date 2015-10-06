@@ -5,8 +5,7 @@ Based on the Matlab code produced for the Benchmark Simulation Model No 2 (BSM2)
 
 
 #Interface and Usage
-Main class allows user access to the model through a command line interface
-Command line arguments:
+A command line interface can be used to run simulations with the following command line arguments:
 
 * -steady		  
   * Run steady state simulation, default setting uses parameters from BSM2 implementation
@@ -126,9 +125,14 @@ CSV files contain the variable values in a ';' separated string. The influent fi
 
 
 #Credits
+
+Special thanks to Ulf Jeppsson, Christian Rosen and Darko Vrecko for use of their Matlab code of the ADM1, developed when (around 2004) they were all working together at the Department of Industrial Electrical Engineering and Automation (IEA), Lund University, Sweden.
+
+
+Referenced works:
+
 * Batstone, D.J., Keller, J., Angelidaki, I., Kalyuzhnyi, S.V., Pavlostathis, S.G., Rozzi, A., Sanders, W.T.M., Siegrist, H. & Vavilin, V.A. (2002). Anaerobic Digestion Model No. 1 (ADM1). IWA Scientific and Technical Report No 13, IWA Publishing, London, UK.
 * Gernaey, K.V., Jeppsson, U., Vanrolleghem, P.A. & Copp, J.B. (2014). Benchmarking of Control Strategies for Wastewater Treatment Plants. IWA Scientific and Technical Report No. 23, IWA Publishing, London, UK.
-* Special thanks to Ulf Jeppsson, Christian Rosen and Darko Vrecko for use of their Matlab code of the ADM1, developed when (around 2004) they were all working together at the Department of Industrial Electrical Engineering and Automation (IEA), Lund University, Sweden.
 
 
 #License

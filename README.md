@@ -4,6 +4,18 @@ A Java implementation of the Anaerobic Digestion Model No 1 (ADM1).
 Based on the Matlab code produced for the Benchmark Simulation Model No 2 (BSM2) produced by the International Water Association's Task Group for Mathematical Modelling of Anaerobic Digestion Processes.
 
 
+This work has been created at:
+
+Lehrstuhl für Strömungsmechanik
+
+Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)
+
+
+When using this program in your studies please cite as follows:
+Pettigrew, L.: jADM1 - A Java implementation of the Anaerobic Digestion Model No 1. URL https://github.com/liampetti/jADM1, online (2015).
+
+
+
 #Interface and Usage
 A command line interface can be used to run simulations with the following command line arguments:
 

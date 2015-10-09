@@ -1,7 +1,7 @@
 #jADM1
 A Java implementation of the Anaerobic Digestion Model No 1 (ADM1).
 
-Based on the Matlab code produced for the Benchmark Simulation Model No 2 (BSM2) produced by the International Water Association's Task Group for Mathematical Modelling of Anaerobic Digestion Processes.
+Based on the Matlab code produced for the Benchmark Simulation Model No 2 (BSM2) produced by the International Water Association (IWA) Task Group on Benchmarking of Control Strategies for Wastewater Treatment Plants. The original ADM1 was developed by the IWA Task Group for Mathematical Modelling of Anaerobic Digestion Processes.
 
 
 This work has been created at:
@@ -41,6 +41,12 @@ A command line interface can be used to run simulations with the following comma
   * Run as ODE (very slow!)
 * -event 0 0.0 true 	
   * Add state event to the simulation to tell it when to stop, three variables: variable number, variable value, rising/falling (true/false)
+  
+
+For example, the default BSM2 200-day ADM1 steady state simulation can be run using the command 
+
+> 				java -jar jADM1.jar -steady
+ 
  
  
 CSV files contain the variable values in a ';' separated string. The influent file can contain 42 or 26 variables (BSM2 export).

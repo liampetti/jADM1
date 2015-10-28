@@ -65,7 +65,7 @@ public class DigesterParameters {
 		 * Fixed Digester Parameters
 		 */
 		T_base=298.15;    		// 0.  Base temp: 25 degC = 298.15 K (273.15 + 25)
-		T_op=308.15;      		// 1.  Operational temperature of AD and interfaces, 35 degC, should be an input 
+		T_op=308.15;      		// 1.  Operational temperature of AD and interfaces, 35 degC, should be an input - NOT USED
 		pK_w_base=14.0; 		// 2.  Log10 of acid-base equilibrium coefficient
 		pK_a_va_base=4.86;		// 3.  Log10 of acid-base equilibrium coefficient valerate
 		pK_a_bu_base=4.82;		// 4.  Log10 of acid-base equilibrium coefficient butyrate

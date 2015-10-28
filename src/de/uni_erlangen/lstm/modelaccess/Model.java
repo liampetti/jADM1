@@ -179,7 +179,7 @@ public class Model implements Runnable {
 						}
 						// We need to pull variables (S_h2 and acid-base) directly from the model if using DAE
 						if (dae) {
-							timemodel = ode.getDAEVars();
+							timemodel = ode.getDimensions();
 						}
 			        	writer.WriteArray("cont_model_output.csv", timemodel);
 			        }
@@ -219,7 +219,7 @@ public class Model implements Runnable {
 
 		// We need to pull variables (S_h2 and acid-base) directly from the model if using DAE
 		if (dae) {
-			x = ode.getDAEVars();
+			x = ode.getDimensions();
 		}
 		
 		finished = true;
@@ -239,6 +239,10 @@ public class Model implements Runnable {
 	
 	public double[] getU() {
 		return u;
+	}
+	
+	public double[] getParam() {
+		return param;
 	}
 	
 	public double getEnd() {

@@ -90,4 +90,17 @@ public class CSVWriter {
 			LOGGER.severe(e.toString());
 		} 
 	}
+	
+	/*
+	 * Clear file
+	 */
+	public void Clear(String filename) {				
+		try {
+			PrintStream fileStream = new PrintStream(new FileOutputStream(filename, false));
+			fileStream.print("");
+			fileStream.close();
+		} catch (IOException e) {
+			LOGGER.severe(e.toString());
+		} 
+	}
 }

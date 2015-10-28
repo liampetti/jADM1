@@ -47,7 +47,7 @@ public class DigesterInit {
 	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I;
 	private double X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I;
 	private double S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4, S_gas_co2;
-	private double Q_D, T_D, temp0, temp1, temp2, temp3, temp4;
+	private double Q_D, T_D, T_E, gas_vol, ph, M_gas_ch4, temp4;
 
 	/** 
 	 * Default settings according to what you would typically find for sludge digesters
@@ -95,11 +95,11 @@ public class DigesterInit {
 		S_gas_ch4 = 1.63; // 33. methane concentration in gas phase (kg COD/m3)[g COD/L]
 		S_gas_co2 = 0.014; // 34. carbon dioxide concentration in gas phase (kmole C/m3)
 		Q_D = 0.0; // 35. flow rate (m3/d) - Set by influent
-		T_D = 35.0; // 36. temperature (deg C)
-		temp0 = 0.0; // 37. Optional
-		temp1 = 0.0; // 38. Optional
-		temp2 = 0.0; // 39. Optional
-		temp3 = 0.0; // 40. Optional
+		T_D = 35.0; // 36. digester temperature (deg C)
+		T_E = 17.0; // 37. environment temperature (deg C)
+		gas_vol = 0.0; // 38. gas volume (m3)
+		ph = 0.0; // 39. pH
+		M_gas_ch4 = 0.0; // 40. Total methane in gas phase (kg COD)
 		temp4 = 0.0; // 41. Optional
 	}
 	
@@ -136,7 +136,7 @@ public class DigesterInit {
 		return new double[] { S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4,
 				S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
 				X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
-				S_gas_co2, Q_D, T_D, temp0, temp1, temp2, temp3, temp4 };
+				S_gas_co2, Q_D, T_D, T_E, gas_vol, ph, M_gas_ch4, temp4 };
 	}
 	
 	/**
@@ -180,10 +180,10 @@ public class DigesterInit {
 		S_gas_co2=x[34];
 		Q_D=x[35];
 		T_D=x[36];
-		temp0=x[37];
-		temp1=x[38];
-		temp2=x[39];
-		temp3=x[40];
+		T_E=x[37];
+		gas_vol=x[38];
+		ph=x[39];
+		M_gas_ch4=x[40];
 		temp4=x[41];
 	}
 	
@@ -487,35 +487,35 @@ public class DigesterInit {
 	}
 
 	public double getQ_Gas() {
-		return temp0;
+		return T_E;
 	}
 
 	public void setQ_Gas(double q_gas) {
-		temp0 = q_gas;
+		T_E = q_gas;
 	}
 
 	public double getP_Ch4() {
-		return temp1;
+		return gas_vol;
 	}
 
 	public void setP_Ch4(double p_ch4) {
-		temp1 = p_ch4;
+		gas_vol = p_ch4;
 	}
 
 	public double getCOD() {
-		return temp2;
+		return ph;
 	}
 
 	public void setCOD(double cod) {
-		temp2 = cod;
+		ph = cod;
 	}
 
 	public double getS_gas_h2s() {
-		return temp3;
+		return M_gas_ch4;
 	}
 
 	public void setS_gas_h2s(double s_gas_h2s) {
-		temp3 = s_gas_h2s;
+		M_gas_ch4 = s_gas_h2s;
 	}
 
 	public double getX_D5_D() {

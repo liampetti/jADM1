@@ -11,9 +11,8 @@ Lehrstuhl für Strömungsmechanik
 Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)
 
 
-When using this program in your studies please cite as follows:
-Pettigrew, L.: jADM1 - A Java implementation of the Anaerobic Digestion Model No 1. URL https://github.com/liampetti/jADM1, online (2015).
-
+Usage of this model can be found in the following conference paper:
+Pettigrew, L., Hubert, S., Groß, F., Delgado, A. “Implementation of Dynamic Biological Process Models into a Reference Net Simulation Environment.” In 16. ASIM Dedicated Conference Simulation in Production and Logistics. Dortmund: Fraunhofer IRB Verlag, 2015.
 
 
 #Interface and Usage

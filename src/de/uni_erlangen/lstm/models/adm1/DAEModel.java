@@ -117,21 +117,6 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		// stoich13 = -C_bac+C_xc
 		stoich13 = -param[78]+param[56];
 		
-		// Adjustments for acid-base equations
-		factor = (1.0/param[0] - 1.0/param[1])/(100.0*R);
-		K_w = Math.pow(10,-param[2])*Math.exp(55900.0*factor); // T adjustment for K_w 
-		K_a_va = Math.pow(10,-param[3]);
-		K_a_bu = Math.pow(10,-param[4]);
-		K_a_pro = Math.pow(10,-param[5]);
-		K_a_ac = Math.pow(10,-param[6]);
-		K_a_co2 = Math.pow(10,-param[7])*Math.exp(7646.0*factor); // T adjustment for K_a_co2 
-		K_a_IN = Math.pow(10,-param[8])*Math.exp(51965.0*factor); // T adjustment for K_a_IN 
-		
-		K_H_h2 = param[9]*Math.exp(-4180.0*factor);     // T adjustment for K_H_h2
-		K_H_ch4 = param[10]*Math.exp(-14240.0*factor);  // T adjustment for K_H_ch4
-		K_H_co2 = param[11]*Math.exp(-19410.0*factor);  // T adjustment for K_H_co2
-		p_gas_h2o = param[12]*Math.exp(5290.0*(1.0/param[0] - 1.0/param[1]));  // T adjustment for water vapour saturation pressure	
-	
 		// pH Inhibition
 		pHLim_aa = Math.pow(10,(-(param[13] + param[14])/2.0));
 		pHLim_ac = Math.pow(10,(-(param[15] + param[16])/2.0));
@@ -141,8 +126,8 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		n_h2 = 3.0/(param[17]-param[18]);
 	}
 	
-	// Function for retrieving the S_h2 variable and acid-base rates from the DAE
-	public double[] getDAEVars() {		
+	// Function for retrieving the current variables from the model
+	public double[] getDimensions() {		
 		return xtemp;
 	}
 	
@@ -157,6 +142,21 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 			}
 		}
 		
+		// Adjustments for acid-base equations
+		factor = (1.0/(param[0]) - 1.0/(273.15+xtemp[36]))/(100.0*R);
+		K_w = Math.pow(10,-param[2])*Math.exp(55900.0*factor); // T adjustment for K_w 
+		K_a_co2 = Math.pow(10,-param[7])*Math.exp(7646.0*factor); // T adjustment for K_a_co2 
+		K_a_IN = Math.pow(10,-param[8])*Math.exp(51965.0*factor); // T adjustment for K_a_IN 		
+		K_H_h2 = param[9]*Math.exp(-4180.0*factor);     // T adjustment for K_H_h2
+		K_H_ch4 = param[10]*Math.exp(-14240.0*factor);  // T adjustment for K_H_ch4
+		K_H_co2 = param[11]*Math.exp(-19410.0*factor);  // T adjustment for K_H_co2
+		p_gas_h2o = param[12]*Math.exp(5290.0*(1.0/(param[0]) - 1.0/(273.15+xtemp[36])));  // T adjustment for water vapour saturation pressure	
+			
+		K_a_va = Math.pow(10,-param[3]);
+		K_a_bu = Math.pow(10,-param[4]);
+		K_a_pro = Math.pow(10,-param[5]);
+		K_a_ac = Math.pow(10,-param[6]);
+		
 		// Run the DAE functions
 		runDAE();
 		
@@ -169,9 +169,9 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		} 
 		
 		// Adjustments for gas pressure
-		p_gas_h2 = xtemp[32]*R*param[1]/16.0;
-		p_gas_ch4 = xtemp[33]*R*param[1]/64.0;
-		p_gas_co2 = xtemp[34]*R*param[1];
+		p_gas_h2 = xtemp[32]*R*(273.15+xtemp[36])/16.0;
+		p_gas_ch4 = xtemp[33]*R*(273.15+xtemp[36])/64.0;
+		p_gas_co2 = xtemp[34]*R*(273.15+xtemp[36]);
 		P_gas = p_gas_h2 + p_gas_ch4 + p_gas_co2 + p_gas_h2o;
 				
 		// pH Inhibition
@@ -330,12 +330,14 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 
 		dx[35] = 0; // Flow
 		dx[36] = 0; // Temp
-				
-		// Optional 
-		dx[37] = 0;
-		dx[38] = 0;
-		dx[39] = 0; 
-		dx[40] = 0;
+		dx[37] = 0; // Environment Temperature
+			
+		xtemp[38] = q_gas;// Gas production	
+		
+		xtemp[39] = -Math.log10(S_H_ion); // pH
+		
+		xtemp[40] = xtemp[33]*xtemp[38]; // Methane gas (kg)
+		
 		dx[41] = 0;
 	}
 	
@@ -411,7 +413,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 				
 				proc12 = param[40]*xtemp[7]/(param[41]+xtemp[7])*xtemp[22]*inhib[5]; // k_m_h2*(S_h2/(K_S_h2+S_h2))*X_h2*inhib_12, Uptake of hydrogen
 					
-				p_gas_h2 = xtemp[32]*R*param[1]/16.0;
+				p_gas_h2 = xtemp[32]*R*(273.15+xtemp[36])/16.0;
 				procT8 = param[55]*(xtemp[7]-16.0*K_H_h2*p_gas_h2); // kLa*(S_h2-16.0*K_H_h2*p_gas_h2)
 				
 				reac8 = (1.0-param[71])*param[91]*proc5+(1.0-param[79])*param[92]*proc6+(1.0-param[85])*0.3*proc7+(1.0-param[86])*0.15*proc8+(1.0-param[86])*0.2*proc9+(1.0-param[87])*0.43*proc10-proc12-procT8;

@@ -12,6 +12,7 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)
 
 
 Usage of this model can be found in the following conference paper:
+
 Pettigrew, L., Hubert, S., Groß, F., Delgado, A. “Implementation of Dynamic Biological Process Models into a Reference Net Simulation Environment.” In 16. ASIM Dedicated Conference Simulation in Production and Logistics. Dortmund: Fraunhofer IRB Verlag, 2015.
 
 

@@ -237,6 +237,10 @@ public class Model implements Runnable {
 		return x;
 	}
 	
+	public void setX(double[] x) {
+		this.x = x; // Initial effluent
+	}
+	
 	public double[] getU() {
 		return u;
 	}

@@ -332,12 +332,13 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		dx[36] = 0; // Temp
 		dx[37] = 0; // Environment Temperature
 			
-		xtemp[38] = q_gas;// Gas production	
+		xtemp[38] = q_gas;// Gas production
+		
 		
 		xtemp[39] = -Math.log10(S_H_ion); // pH
 		
 		xtemp[40] = xtemp[33]*xtemp[38]; // Methane gas (kg)
-		
+
 		dx[41] = 0;
 	}
 	

@@ -6,8 +6,7 @@ Based on the Matlab code produced for the Benchmark Simulation Model No 2 (BSM2)
 
 This work has been created at:
 
-Lehrstuhl für Strömungsmechanik
-
+Lehrstuhl für Strömungsmechanik,  
 Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)
 
 
@@ -125,13 +124,13 @@ CSV files contain the variable values in a ';' separated string. The influent fi
 
 24/35) flow rate (m3/d) - Set by influent
 
-25/36) temperature (deg C)
+25/36) temperature (deg C) - Set by digester
 
 >37) Optional
 
->38) Optional
+>38) Gas Volume (m3/d)
 
->39) Optional
+>39) pH
 
 >40) Optional
 

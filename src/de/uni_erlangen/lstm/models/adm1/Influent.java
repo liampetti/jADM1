@@ -47,7 +47,7 @@ public class Influent {
 	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I;
 	private double X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I;
 	private double S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4, S_gas_co2;
-	private double Q_D, T_D, T_E, gas_vol, ph, M_gas_ch4, temp4;
+	private double Q_D, T_D, temp0, gas_vol, ph, temp1, temp2;
 
 	/** 
 	 * Default settings according to what you would typically find for sludge digesters
@@ -98,11 +98,11 @@ public class Influent {
 		S_gas_co2 = 0.0; // 34. carbon dioxide concentration in gas phase (kmole C/m3)		
 		Q_D = 170.0; // 35. flow rate (m3/d)
 		T_D = 0.0; // 36. temperature (deg C) - SET BY DIGESTER
-		T_E = 0.0; // 37. environment temperature (deg C) - SET BY DIGESTER
-		gas_vol = 0.0; // 38. gas volume (m3)
+		temp0 = 0.0; // 37. Optional
+		gas_vol = 0.0; // 38. gas volume (m3/d)
 		ph = 0.0; // 39. pH
-		M_gas_ch4 = 0.0; // 40. Total methane in gas phase (kg COD)
-		temp4 = 0.0; // 41. Optional
+		temp1 = 0.0; // 40. Optional
+		temp2 = 0.0; // 41. Optional
 	}
 	
 	/**
@@ -138,7 +138,7 @@ public class Influent {
 		return new double[] { S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4,
 				S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
 				X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
-				S_gas_co2, Q_D, T_D, T_E, gas_vol, ph, M_gas_ch4, temp4 };
+				S_gas_co2, Q_D, T_D, temp0, gas_vol, ph, temp1, temp2 };
 	}
 	
 	/**
@@ -184,11 +184,11 @@ public class Influent {
 			S_gas_h2=0.0;
 			S_gas_ch4=0.0;
 			S_gas_co2=0.0;
-			T_E=0.0;
+			temp0=0.0;
 			gas_vol=0.0;
 			ph=0.0;
-			M_gas_ch4=0.0;
-			temp4=0.0;
+			temp1=0.0;
+			temp2=0.0;
 		} else {
 			S_hva=x[26];
 			S_hbu=x[27];
@@ -201,11 +201,11 @@ public class Influent {
 			S_gas_co2=x[34];
 			Q_D=x[35];
 			T_D=x[36];
-			T_E=x[37];
+			temp0=x[37];
 			gas_vol=x[38];
 			ph=x[39];
-			M_gas_ch4=x[40];
-			temp4=x[41];
+			temp1=x[40];
+			temp2=x[41];
 		}
 	}
 	
@@ -509,11 +509,11 @@ public class Influent {
 	}
 
 	public double getQ_Gas() {
-		return T_E;
+		return temp0;
 	}
 
 	public void setQ_Gas(double q_gas) {
-		T_E = q_gas;
+		temp0 = q_gas;
 	}
 
 	public double getP_Ch4() {
@@ -533,18 +533,18 @@ public class Influent {
 	}
 
 	public double getS_gas_h2s() {
-		return M_gas_ch4;
+		return temp1;
 	}
 
 	public void setS_gas_h2s(double s_gas_h2s) {
-		M_gas_ch4 = s_gas_h2s;
+		temp1 = s_gas_h2s;
 	}
 
 	public double getX_D5_D() {
-		return temp4;
+		return temp2;
 	}
 
 	public void setX_D5_D(double x_D5_D) {
-		temp4 = x_D5_D;
+		temp2 = x_D5_D;
 	}
 }

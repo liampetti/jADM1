@@ -126,15 +126,15 @@ CSV files contain the variable values in a ';' separated string. The influent fi
 
 25/36) temperature (deg C) - Set by digester
 
->37) Optional
+>37) optional
 
->38) Gas Volume (m3/d)
+>38) gas volume (m3/d)
 
 >39) pH
 
->40) Optional
+>40) optional
 
->41) Optional
+>41) optional
 
 
 #Dependencies

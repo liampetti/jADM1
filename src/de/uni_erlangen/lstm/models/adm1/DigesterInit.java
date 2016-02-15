@@ -502,12 +502,12 @@ public class DigesterInit {
 		gas_vol = p_ch4;
 	}
 
-	public double getCOD() {
+	public double getPh() {
 		return ph;
 	}
 
-	public void setCOD(double cod) {
-		ph = cod;
+	public void setPh(double ph) {
+		this.ph = ph;
 	}
 
 	public double getS_gas_h2s() {

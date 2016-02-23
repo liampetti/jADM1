@@ -54,7 +54,7 @@ public class Model implements Runnable {
 	private List<DiscreteEvent> events;
 	private boolean finished;
 	private boolean onlineRecord; // Record model to CSV
-	private double step;
+	private double resolution; // How often to sample data from continuous model
 	private double progress;
 	private boolean dae;
 		
@@ -70,6 +70,7 @@ public class Model implements Runnable {
 	public Model(double start, double end, DigesterParameters parameters, DigesterInit initial, Influent influent, boolean onlineRecord) {
 		dae = true;
 		this.onlineRecord = onlineRecord;
+		this.resolution = 0.01041666667; // 15 minutes in days as standard resolution
 		u = influent.getIn(); // Influent
 		x = initial.getInits(); // Output (initial reactor conditions)
 		param = parameters.getParameters();	
@@ -81,7 +82,6 @@ public class Model implements Runnable {
 		this.start = start;
 		this.end = end;
 		this.progress = start;
-		step = 0.1;
 		
 		// Flow rate is set by influent
 		x[35] = u[35]; // Effluent flow rate = Influent flow rate
@@ -124,6 +124,10 @@ public class Model implements Runnable {
 		this.events = events;
 	}
 	
+	public void setResolution(double res) {
+		this.resolution = res;
+	}
+	
 	/**
 	 * Run the model using set parameters
 	 */
@@ -160,30 +164,26 @@ public class Model implements Runnable {
 		if (onlineRecord) {
 			final CSVWriter writer = new CSVWriter();
 			StepHandler stepHandler = new StepHandler() {
-				private int i = 0;
-				private double prevStep = 0;
+				double prevT = 0.0;
 				
 			    public void init(double t0, double[] y0, double t) {
 			    }
 			            
 			    public void handleStep(StepInterpolator interpolator, boolean isLast) {
 			        double   t = interpolator.getCurrentTime();
-			        double[] y = interpolator.getInterpolatedState();
-			        if (i%10 == 0 && prevStep < t-step) {
+			        if (t-prevT > resolution) {
 			        	// Add time to the beginning of the array
-						double[] timemodel = new double[y.length+1];
+						double[] timemodel = new double[ode.getDimensions().length+1];
 						timemodel[0] = t;
-						prevStep = t;
-						for (int i=1;i<timemodel.length;i++) {
-							timemodel[i] = y[i-1];
-						}
+						
 						// We need to pull variables (S_h2 and acid-base) directly from the model if using DAE
-						if (dae) {
-							timemodel = ode.getDimensions();
+						for (int i=1;i<timemodel.length;i++) {
+							timemodel[i] = ode.getDimensions()[i-1];
 						}
+							
 			        	writer.WriteArray("cont_model_output.csv", timemodel);
+			        	prevT = t;
 			        }
-			        i++;
 			    }
 			};
 			integrator.addStepHandler(stepHandler);

@@ -32,9 +32,8 @@ import org.apache.commons.math3.ode.sampling.StepInterpolator;
 
 import de.uni_erlangen.lstm.file.CSVWriter;
 import de.uni_erlangen.lstm.models.adm1.DAEModel;
-import de.uni_erlangen.lstm.models.adm1.DigesterInit;
 import de.uni_erlangen.lstm.models.adm1.DigesterParameters;
-import de.uni_erlangen.lstm.models.adm1.Influent;
+import de.uni_erlangen.lstm.models.adm1.StateVariables;
 
 /**
  * Class for controlling the ADM1 model, can be run on a separate thread
@@ -57,6 +56,7 @@ public class Model implements Runnable {
 	private double resolution; // How often to sample data from continuous model
 	private double progress;
 	private boolean dae;
+	private double fix_pH;
 		
 	/**
 	 * Initialise model using custom parameters and outputs
@@ -67,12 +67,13 @@ public class Model implements Runnable {
 	 * @param outputs 		Custom outputs
 	 * @param contModel 	Build a continuous output model of the solution
 	 */
-	public Model(double start, double end, DigesterParameters parameters, DigesterInit initial, Influent influent, boolean onlineRecord) {
+	public Model(double start, double end, DigesterParameters parameters, StateVariables initial, StateVariables influent, boolean onlineRecord) {
 		dae = true;
+		fix_pH = -1.0;
 		this.onlineRecord = onlineRecord;
 		this.resolution = 0.01041666667; // 15 minutes in days as standard resolution
-		u = influent.getIn(); // Influent
-		x = initial.getInits(); // Output (initial reactor conditions)
+		u = influent.getVar(); // Influent
+		x = initial.getVar(); // Output (initial reactor conditions)
 		param = parameters.getParameters();	
 		init(start, end);
 	}
@@ -99,13 +100,13 @@ public class Model implements Runnable {
 		this.progress = start;
 	}
 	
-	public void setInfluent(Influent influent) {		
-		u = influent.getIn(); // Influent
+	public void setInfluent(StateVariables influent) {		
+		u = influent.getVar(); // Influent
 		x[35] = u[35]; // Effluent flow rate = Influent flow rate
 	}
 	
-	public void setInitial(DigesterInit initial) {
-		x = initial.getInits(); // Initial effluent
+	public void setInitial(StateVariables initial) {
+		x = initial.getVar(); // Initial effluent
 	}
 	
 	public void setParameters(DigesterParameters parameters) {		
@@ -114,6 +115,10 @@ public class Model implements Runnable {
 	
 	public void setDAE (boolean dae) {
 		this.dae = dae;
+	}
+	
+	public void setpH (double ph) {
+		this.fix_pH = ph;
 	}
 	
 	public void addEvent (DiscreteEvent event) {
@@ -144,7 +149,7 @@ public class Model implements Runnable {
 		//FirstOrderIntegrator integrator = new AdamsMoultonIntegrator(2, 1.0e-8, 100.0, 1.0e-10, 1.0e-10);
 		
 		// influent values, digester parameters, S_H_ion, dae system
-		final DAEModel ode = new DAEModel(u, param, S_H_ion, dae);
+		final DAEModel ode = new DAEModel(u, param, S_H_ion, dae, fix_pH);
 		//FirstOrderDifferentialEquations ode = model; 
 		
 		// Records progress

@@ -63,6 +63,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 	private double[] u; // influent
 	private double[] xtemp;
 	private double factor, R, P_atm;
+	private double fix_pH;
 	
 	/** 
 	 * Initiates the model using the defined parameters and pre-calculates the stoichiometry parameter values for use in the water phase
@@ -73,10 +74,11 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 	 * @param sh Initial S_H_ion value
 	 * @param dae Turn on or off the dae system
 	 */
-	public DAEModel(double[] influent, double[] parameters, double sh, boolean dae) {		
+	public DAEModel(double[] influent, double[] parameters, double sh, boolean dae, double ph) {		
 		shDAE = dae; // Turn on algebraic equations for SH+ (ph and ion states)
 		sh2DAE = dae; // Turn on algebraic equations for SH2
 		S_H_ion = sh;
+		fix_pH = ph;
 		inhib = new double[6]; // holds inhibition functions
 		//u = influent; // Influent pointer
 		u = new double[influent.length];		
@@ -157,16 +159,20 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		K_a_pro = Math.pow(10,-param[5]);
 		K_a_ac = Math.pow(10,-param[6]);
 		
-		// Run the DAE functions
-		runDAE();
-		
-		// SH+ Equation (pH and ion states)
-		if (!shDAE) {
-			// Scat+(S_IN-Snh3)-hco3-(Sac/64)-(Spro/112)-(Sbu/160)-(Sva/208)-San
-			phi = xtemp[24]+(xtemp[10]-xtemp[31])-xtemp[30]-(xtemp[29]/64.0)-(xtemp[28]/112.0)-
-					(xtemp[27]/160.0)-(xtemp[26]/208.0)-xtemp[25];
-			S_H_ion = (-phi*0.5)+0.5*Math.sqrt(phi*phi+(4.0*K_w)); // SH+
-		} 
+		if (fix_pH >= 0) {
+			S_H_ion = Math.pow(10, -fix_pH);
+		} else {
+			// Run the DAE functions
+			runDAE();
+			
+			// SH+ Equation (pH and ion states)
+			if (!shDAE) {
+				// Scat+(S_IN-Snh3)-hco3-(Sac/64)-(Spro/112)-(Sbu/160)-(Sva/208)-San
+				phi = xtemp[24]+(xtemp[10]-xtemp[31])-xtemp[30]-(xtemp[29]/64.0)-(xtemp[28]/112.0)-
+						(xtemp[27]/160.0)-(xtemp[26]/208.0)-xtemp[25];
+				S_H_ion = (-phi*0.5)+0.5*Math.sqrt(phi*phi+(4.0*K_w)); // SH+
+			} 
+		}
 		
 		// Adjustments for gas pressure
 		p_gas_h2 = xtemp[32]*R*(273.15+xtemp[36])/16.0;

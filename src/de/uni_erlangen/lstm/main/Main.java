@@ -29,9 +29,9 @@ import de.uni_erlangen.lstm.file.CSVReader;
 import de.uni_erlangen.lstm.file.CSVWriter;
 import de.uni_erlangen.lstm.modelaccess.DiscreteEvent;
 import de.uni_erlangen.lstm.modelaccess.Model;
-import de.uni_erlangen.lstm.models.adm1.DigesterInit;
+import de.uni_erlangen.lstm.models.adm1.BSM2Defaults;
 import de.uni_erlangen.lstm.models.adm1.DigesterParameters;
-import de.uni_erlangen.lstm.models.adm1.Influent;
+import de.uni_erlangen.lstm.models.adm1.StateVariables;
 
 /**
  * Main class allows user access to the model through a command line interface
@@ -62,8 +62,8 @@ public class Main {
 	private double stime;
 	private double start; // Model start time
 	private double finish; // Model end time
-	private DigesterInit initial; // Digester initial conditions
-	private Influent influent; // Influent
+	private StateVariables initial; // Digester initial conditions
+	private StateVariables influent; // Influent
 	private DigesterParameters parameters; // Model parameters
 	private boolean modOut; // Store all model outputs (needed for plotting)
 	private double step; // Adjust time step size for model outputs
@@ -101,8 +101,11 @@ public class Main {
 		stime = System.currentTimeMillis();
 		events = new ArrayList<DiscreteEvent>();
 		// Setup model outputs and parameters (default is BSM2)
-		initial = new DigesterInit();
-		influent = new Influent();
+		BSM2Defaults defaults = new BSM2Defaults();
+		initial = new StateVariables();
+		initial.setVar(defaults.DigesterInit());
+		influent = new StateVariables();
+		influent.setVar(defaults.Influent());
 		parameters = new DigesterParameters();
 		// No command line arguments, run a default setup
 		start = 0.0;
@@ -152,9 +155,9 @@ public class Main {
 		CSVWriter writer = new CSVWriter();
 		events = new ArrayList<DiscreteEvent>();
 		// Setup model outputs and parameters (default is BSM2)
-		initial = new DigesterInit();
-		initial.readInits("dynamic_init.csv");
-		influent = new Influent();
+		initial = new StateVariables();
+		initial.readVar("dynamic_init.csv");
+		influent = new StateVariables();
 		dynamicIn = new CSVReader("digesterin.csv", ",");
 		parameters = new DigesterParameters();
 		// No command line arguments, run a default setup
@@ -180,7 +183,7 @@ public class Main {
 				for (int i=0;i<in.length;i++) {
 					in[i] = Double.parseDouble(inString[i]);
 				}
-				influent.setIn(in);
+				influent.setVar(in);
 				model.setInfluent(influent);
 			}
 			
@@ -208,12 +211,12 @@ public class Main {
 					case "-f":		finish = Double.parseDouble(args[i+1]);
 									break;
 					case "-in":		if (steady) {	
-										influent.readIn(args[i+1]);
+										influent.readVar(args[i+1]);
 									} else {
 										dynamicIn = new CSVReader(args[i+1], ",");
 									}
 									break;
-					case "-init":	initial.readInits(args[i+1]);
+					case "-init":	initial.readVar(args[i+1]);
 									break;
 					case "-param": 	parameters.readParameters(args[i+1]);
 									break;

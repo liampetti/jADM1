@@ -222,7 +222,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		
 		// Gas transfer rates
 		procT8 = param[55]*(xtemp[7]-16.0*K_H_h2*p_gas_h2); // kLa*(S_h2-16.0*K_H_h2*p_gas_h2)
-		procT9 = param[55]*(xtemp[8]-64.0*K_H_ch4*p_gas_ch4); // kLa*(S_ch4-64.0*K_H_ch4*p_gas_h2)
+		procT9 = param[55]*(xtemp[8]-64.0*K_H_ch4*p_gas_ch4); // kLa*(S_ch4-64.0*K_H_ch4*p_gas_ch4)
 		procT10 = param[55]*((xtemp[9]-xtemp[30])-K_H_co2*p_gas_co2); // kLa*((S_IC-S_hco3)-K_H_co2*p_gas_co2)
 		
 		// Reactions

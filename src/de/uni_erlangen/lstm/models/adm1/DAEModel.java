@@ -52,7 +52,8 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 	private double procT8, procT9, procT10;
 	private double I_pH_aa, I_pH_ac, I_pH_h2, I_IN_lim, I_h2_fa, I_h2_c4, I_h2_pro, I_nh3;
 	private double reac1, reac2, reac3, reac4, reac5, reac6, reac7, reac8, reac9, reac10, reac11, reac12, reac13;
-	private double reac14, reac15, reac16, reac17, reac18, reac19, reac20, reac21, reac22, reac23, reac24;
+	private double reac14, reac15, reac16, reac17, reac18, reac19, reac20, reac21, reac22, reac23, reac24;//, reac25;
+	//private double reac26, reac27, reac28;
 	private double stoich1, stoich2, stoich3, stoich4, stoich5, stoich6, stoich7, stoich8, stoich9, stoich10, stoich11, stoich12, stoich13;
 	private double p_gas_h2o, P_gas, p_gas_h2, p_gas_ch4, p_gas_co2, q_gas;
 	private double pHLim_aa, pHLim_ac, pHLim_h2, n_aa, n_ac, n_h2;
@@ -337,15 +338,42 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		dx[35] = 0; // Flow
 		dx[36] = 0; // Temp
 		
-		dx[37] = 0;
-			
-		xtemp[38] = q_gas;// Gas production (m3/d)
+		// Correction by factor of 64.0 due to COD basis of Sgas,ch4
+		xtemp[37] = (q_gas*xtemp[33])*R*(273.15+xtemp[36])/64.0; // Methane gas (m3/d)
 		
-		
+		//System.out.println(t+"; sch4="+xtemp[8]+"; sgasch4="+xtemp[33]);
+
+		xtemp[38] = q_gas;	// Gas production (m3/d)
+				
 		xtemp[39] = -Math.log10(S_H_ion); // pH
 		
 		xtemp[40] = 0; 
-		xtemp[41] = 0; 
+		xtemp[41] = 0;
+		
+		// Bio P Reactions
+		// P Removal Equations
+		/*
+		reac25 = -stoich1_p*proc1-stoich2_p*proc2-stoich3_p*proc3-stoich4_p*proc4-stoich5_p*proc5- stoich6_p*proc6-
+				stoich7_p*proc7-stoich8_p*proc8-stoich9_p*proc9-stoich10_p*proc10-stoich11_p*proc11-stoich12_p*proc12-
+				stoich13_p*proc13-stoich13_p*proc14-stoich13_p*proc15-stoich13_p*proc16-stoich13_p*proc17-stoich13_p*proc18-
+				stoich13_p*proc19-stoich14_p*proc20-stoich15_p*proc21-stoich16_p*proc22-stoich17_p*proc23-stoich18_p*proc24-
+				stoich19_p*proc25-stoich20_p*proc26-stoich21_p*proc27-stoich22_p*proc28-stoich23_p*proc29-stoich24_p*proc30-
+				stoich25_p*proc31-stoich26_p*proc32-stoich27_p*proc33-stoich28_p*proc34-stoich29_p*proc35-stoich30_p*proc36-
+				stoich31_p*proc37-stoich32_p*proc38-stoich33_p*proc39;
+		reac26 = -proc26 + proc20 + proc21 + proc22 + proc23;                               // XPHA
+		reac27 = -proc25 - YPO4*proc20 - YPO4*proc21 - YPO4*proc22 - YPO4*proc23;           // XPP
+		reac28 = -proc24;                                                                   // XPAO
+		*/
+		/*
+		//1.0/V_liq*(u[24]*(u[26]-x[42])) + reac25 - 2*P_acp*proc52 - 3*P_hap*proc53 - P_cap*proc54- 3*P_ocp*proc55 - P_struv*proc56 - P_newb*proc57 - P_kstruv*proc59 + P_fepo4*proc61 - P_alpo4*proc62 -  2.0*P_fe3po42*proc63;
+		dx[42] = 0; // S_IP
+		//1.0/V_liq*(u[24]*(u[27]-x[43])) + reac26;
+		dx[43] = 0; // X_PHA
+		//1.0/V_liq*(u[24]*(u[28]-x[44])) + reac27; 
+		dx[44] = 0; // X_PP
+		//1.0/V_liq*(u[24]*(u[29]-x[45])) + reac28;
+		dx[45] = 0; // X_PAO	
+		*/	
 	}
 	
 	public void runDAE() {			

@@ -39,10 +39,9 @@ public class CSVWriter {
 	/*
 	 * Print one line of data
 	 */
-	public void WriteString(String filename, String output) {				
+	public void WriteString(String filename, String output, boolean append) {				
 		try {
-			// Set the fileoutput stream to append mode
-			PrintStream fileStream = new PrintStream(new FileOutputStream(filename, true));
+			PrintStream fileStream = new PrintStream(new FileOutputStream(filename, append));
 			fileStream.println(output);
 			fileStream.close();
 		} catch (IOException e) {
@@ -53,10 +52,9 @@ public class CSVWriter {
 	/*
 	 * Print one line of data
 	 */
-	public void WriteArray(String filename, double[] outputs) {				
+	public void WriteArray(String filename, double[] outputs, boolean append) {				
 		try {
-			// Set the fileoutput stream to append mode
-			PrintStream fileStream = new PrintStream(new FileOutputStream(filename, true));
+			PrintStream fileStream = new PrintStream(new FileOutputStream(filename, append));
 			String printer = "";
 			for (int i=0;i<outputs.length;i++) {
 				printer += outputs[i] + ";";

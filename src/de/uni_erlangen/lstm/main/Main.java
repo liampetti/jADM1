@@ -147,7 +147,8 @@ public class Main {
 	 	}
 		System.out.println(output);
 		CSVWriter writer = new CSVWriter();
-		writer.WriteString("steady_result.csv", output);
+		// Append
+		writer.WriteString("steady_result.csv", output, true);
 	}
 	
 	private void runDynamic() {
@@ -189,7 +190,8 @@ public class Main {
 			
 			model.setTime(start, start+step);
 			model.run();
-			writer.WriteArray("dynamic_output.csv", model.getX());
+			// Append
+			writer.WriteArray("dynamic_output.csv", model.getX(), true);
 			start = start+step;
 			if (t%(Math.round(finish/100)) == 0) {
 				System.out.println("Progress = " + String.format("%.2f",(start/finish)*100) + "%");

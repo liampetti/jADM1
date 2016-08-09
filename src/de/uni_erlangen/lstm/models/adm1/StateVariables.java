@@ -47,7 +47,7 @@ public class StateVariables {
 	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I = 0.0;
 	private double X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I = 0.0;
 	private double S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4, S_gas_co2 = 0.0;
-	private double Q_D, T_D, temp0, gas_vol, ph, temp1, temp2 = 0.0;
+	private double Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2 = 0.0;
 	
 	/**
 	 * Read the outputs from a given CSV file
@@ -72,7 +72,8 @@ public class StateVariables {
 	public void writeVar(String filename) {
 		double[] x = getVar();
 		CSVWriter writer = new CSVWriter();
-		writer.WriteArray(filename, x);
+		// append
+		writer.WriteArray(filename, x, true);
 	}
 	
 	/**
@@ -82,7 +83,7 @@ public class StateVariables {
 		return new double[] { S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4,
 				S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
 				X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
-				S_gas_co2, Q_D, T_D, temp0, gas_vol, ph, temp1, temp2 };
+				S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2 };
 	}
 	
 	/**
@@ -128,7 +129,7 @@ public class StateVariables {
 			S_gas_h2=0.0;
 			S_gas_ch4=0.0;
 			S_gas_co2=0.0;
-			temp0=0.0;
+			gas_ch4=0.0;
 			gas_vol=0.0;
 			ph=0.0;
 			temp1=0.0;
@@ -145,7 +146,7 @@ public class StateVariables {
 			S_gas_co2=x[34];
 			Q_D=x[35];
 			T_D=x[36];
-			temp0=x[37];
+			gas_ch4=x[37];
 			gas_vol=x[38];
 			ph=x[39];
 			temp1=x[40];
@@ -453,19 +454,11 @@ public class StateVariables {
 	}
 
 	public double getQ_Gas() {
-		return temp0;
-	}
-
-	public void setQ_Gas(double q_gas) {
-		temp0 = q_gas;
-	}
-
-	public double getP_Ch4() {
 		return gas_vol;
 	}
 
-	public void setP_Ch4(double p_ch4) {
-		gas_vol = p_ch4;
+	public void setQ_Gas(double q_gas) {
+		gas_vol = q_gas;
 	}
 
 	public double getPh() {

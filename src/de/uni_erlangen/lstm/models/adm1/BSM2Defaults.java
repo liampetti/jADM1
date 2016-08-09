@@ -17,10 +17,10 @@ public class BSM2Defaults {
 	/*
 	 * Dynamic State Variables
 	 */
-	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I;
-	private double X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I;
+	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I;//, S_IP;
+	private double X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I;//, X_PHA, X_PP, X_PAO;
 	private double S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4, S_gas_co2;
-	private double Q_D, T_D, temp0, gas_vol, ph, temp1, temp2;
+	private double Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2;//, temp3;
 	
 	public double[] DigesterInit() {
 		/*
@@ -63,19 +63,28 @@ public class BSM2Defaults {
 		S_nh3 = 0.0041; // 31. ammonia (kmole N/m3)
 		S_gas_h2 = 1.02e-005; // 32. hydrogen concentration in gas phase (kg COD/m3)[g COD/L]
 		S_gas_ch4 = 1.63; // 33. methane concentration in gas phase (kg COD/m3)[g COD/L]
-		S_gas_co2 = 0.014; // 34. carbon dioxide concentration in gas phase (kmole C/m3)
+		S_gas_co2 = 0.014; // 34. carbon dioxide concentration in gas phase (kmole C/m3)[mol C/L]
 		Q_D = 0.0; // 35. flow rate (m3/d) - Set by influent
 		T_D = 35.0; // 36. digester temperature (deg C)
-		temp0 = 0.0; // 37. Optional
+		gas_ch4 = 0.0; // 37. Fraction methane in gas phase
 		gas_vol = 0.0; // 38. gas volume (m3/d)
 		ph = 0.0; // 39. pH
 		temp1 = 0.0; //40. Optional
 		temp2 = 0.0; // 41. Optional
+		/*
+		// Bio P Reactions ----->
+		S_IP = 0.0; // 42. Inorganic phosphorus (ADM1) (kmole P/m3)
+		X_PHA = 0.0; // 43. Polyhydroxyalkanoates (kg COD/m3)[g COD/L]
+		X_PP = 0.0; // 44. Polyphosphates (kg COD/m3)[g COD/L]
+		X_PAO = 0.0; // 45. Phosphorus accumulating organisms (kg COD/m3)[g COD/L]
+		temp3 = 0.0; // 46. Optional
+		// <---- Bio P Reactions
+		*/
 		
 		return new double[] { S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4,
 				S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
 				X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
-				S_gas_co2, Q_D, T_D, temp0, gas_vol, ph, temp1, temp2 };
+				S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2 };
 	}
 	
 	public double[] Influent() {
@@ -124,7 +133,7 @@ public class BSM2Defaults {
 		S_gas_co2 = 0.0; // 34. carbon dioxide concentration in gas phase (kmole C/m3)		
 		Q_D = 170.0; // 35. flow rate (m3/d)
 		T_D = 0.0; // 36. temperature (deg C) - SET BY DIGESTER
-		temp0 = 0.0; // 37. Optional
+		gas_ch4 = 0.0; // 37. Fraction methane in gas phase
 		gas_vol = 0.0; // 38. gas volume (m3/d)
 		ph = 0.0; // 39. pH
 		temp1 = 0.0; // 40. Optional
@@ -133,7 +142,7 @@ public class BSM2Defaults {
 		return new double[] { S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4,
 				S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
 				X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
-				S_gas_co2, Q_D, T_D, temp0, gas_vol, ph, temp1, temp2 };
+				S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2 };
 	}
 
 }

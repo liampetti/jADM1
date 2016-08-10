@@ -43,11 +43,12 @@ public class StateVariables {
 	
 	/*
 	 * Digestor Influent
-	 */
-	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I = 0.0;
-	private double X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I = 0.0;
+	 */	
+	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I, S_IP = 0.0;
+	private double X_xc, X_xch, X_xpr, X_xli, X_c, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I, X_PHA, X_PP, X_PAO = 0.0;
 	private double S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4, S_gas_co2 = 0.0;
-	private double Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2 = 0.0;
+	private double Q_D, T_D, gas_ch4, gas_vol, ph = 0.0;
+	private double temp1, temp2, temp3 = 0.0;
 	
 	/**
 	 * Read the outputs from a given CSV file
@@ -81,9 +82,11 @@ public class StateVariables {
 	 */
 	public double[] getVar() {
 		return new double[] { S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4,
-				S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
-				X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
-				S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2 };
+			S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
+			X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
+			S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph,
+			X_c, X_xch, X_xpr, X_xli, S_IP, X_PHA, X_PP, X_PAO, 
+			temp1, temp2, temp3};
 	}
 	
 	/**
@@ -149,8 +152,17 @@ public class StateVariables {
 			gas_ch4=x[37];
 			gas_vol=x[38];
 			ph=x[39];
-			temp1=x[40];
-			temp2=x[41];
+			X_c=x[40];
+			X_xch=x[41];
+			X_xpr=x[42];
+			X_xli=x[43];
+			S_IP=x[44];
+			X_PHA=x[45];
+			X_PP=x[46];
+			X_PAO=x[47];
+			temp1=x[48];
+			temp2=x[49];
+			temp3=x[50];
 		}
 	}
 	
@@ -437,6 +449,70 @@ public class StateVariables {
 		S_gas_co2 = s_gas_co2;
 	}
 
+	public double getS_IP() {
+		return S_IP;
+	}
+
+	public void setS_IP(double s_IP) {
+		S_IP = s_IP;
+	}
+
+	public double getX_xch() {
+		return X_xch;
+	}
+
+	public void setX_xch(double x_xch) {
+		X_xch = x_xch;
+	}
+
+	public double getX_xpr() {
+		return X_xpr;
+	}
+
+	public void setX_xpr(double x_xpr) {
+		X_xpr = x_xpr;
+	}
+
+	public double getX_xli() {
+		return X_xli;
+	}
+
+	public void setX_xli(double x_xli) {
+		X_xli = x_xli;
+	}
+
+	public double getX_c() {
+		return X_c;
+	}
+
+	public void setX_c(double x_c) {
+		X_c = x_c;
+	}
+
+	public double getX_PHA() {
+		return X_PHA;
+	}
+
+	public void setX_PHA(double x_PHA) {
+		X_PHA = x_PHA;
+	}
+
+	public double getX_PP() {
+		return X_PP;
+	}
+
+	public void setX_PP(double x_PP) {
+		X_PP = x_PP;
+	}
+
+	public double getX_PAO() {
+		return X_PAO;
+	}
+
+	public void setX_PAO(double x_PAO) {
+		X_PAO = x_PAO;
+	}
+
 	public double getQ_D() {
 		return Q_D;
 	}
@@ -453,12 +529,20 @@ public class StateVariables {
 		T_D = t_D;
 	}
 
-	public double getQ_Gas() {
+	public double getGas_ch4() {
+		return gas_ch4;
+	}
+
+	public void setGas_ch4(double gas_ch4) {
+		this.gas_ch4 = gas_ch4;
+	}
+
+	public double getGas_vol() {
 		return gas_vol;
 	}
 
-	public void setQ_Gas(double q_gas) {
-		gas_vol = q_gas;
+	public void setGas_vol(double gas_vol) {
+		this.gas_vol = gas_vol;
 	}
 
 	public double getPh() {
@@ -469,19 +553,27 @@ public class StateVariables {
 		this.ph = ph;
 	}
 
-	public double getS_gas_h2s() {
+	public double getTemp1() {
 		return temp1;
 	}
 
-	public void setS_gas_h2s(double s_gas_h2s) {
-		temp1 = s_gas_h2s;
+	public void setTemp1(double temp1) {
+		this.temp1 = temp1;
 	}
 
-	public double getX_D5_D() {
+	public double getTemp2() {
 		return temp2;
 	}
 
-	public void setX_D5_D(double x_D5_D) {
-		temp2 = x_D5_D;
+	public void setTemp2(double temp2) {
+		this.temp2 = temp2;
+	}
+
+	public double getTemp3() {
+		return temp3;
+	}
+
+	public void setTemp3(double temp3) {
+		this.temp3 = temp3;
 	}
 }

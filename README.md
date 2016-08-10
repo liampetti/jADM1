@@ -10,9 +10,10 @@ Lehrstuhl für Strömungsmechanik,
 Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)
 
 
-Usage of this model can be found in the following conference paper:
+Usage of this model can be found in the following conference papers:
 
-Pettigrew, L., Hubert, S., Groß, F., Delgado, A. “Implementation of Dynamic Biological Process Models into a Reference Net Simulation Environment.” In 16. ASIM Dedicated Conference Simulation in Production and Logistics. Dortmund: Fraunhofer IRB Verlag, 2015.
+*Pettigrew, L., Hubert, S., Groß, F., Delgado, A. (2015). Implementation of Dynamic Biological Process Models into a Reference Net Simulation Environment. In 16. ASIM Dedicated Conference Simulation in Production and Logistics. Dortmund: Fraunhofer IRB Verlag.
+*Pettigrew, L., Delgado, A. (2016). Neural Network Based Reinforcement Learning Control for Increased Methane Production in an Anaerobic Digestion System. In 3rd IWA Specialized International Conference „Ecotechnologies for Wastewater Treatment“ (ecoSTP16). Cambridge, UK.
 
 
 #Interface and Usage
@@ -126,15 +127,27 @@ CSV files contain the variable values in a ';' separated string. The influent fi
 
 25/36) temperature (deg C) - Set by digester
 
->37) optional
+>37) methane volume (m3/d)
 
 >38) gas volume (m3/d)
 
 >39) pH
 
->40) optional
+>40) Particulate compound concentration composite (kg COD/m3)
 
->41) optional
+>41) Hydrolytic (disintegration) biomass concentration carbohydrate (kg COD/m3)
+
+>42) Hydrolytic (disintegration) biomass concentration protein (kg COD/m3)
+
+>43) Hydrolytic (disintegration) biomass concentration lipid (kg COD/m3)
+
+>44) Inorganic phosphorus (ADM1) (kmole P/m3)
+
+>45) Polyhydroxyalkanoates (kg COD/m3)
+
+>46) Polyphosphates (kg COD/m3)
+
+>47) Phosphorus accumulating organisms (kg COD/m3)
 
 
 #Dependencies
@@ -150,6 +163,8 @@ Referenced works:
 
 * Batstone, D.J., Keller, J., Angelidaki, I., Kalyuzhnyi, S.V., Pavlostathis, S.G., Rozzi, A., Sanders, W.T.M., Siegrist, H. & Vavilin, V.A. (2002). Anaerobic Digestion Model No. 1 (ADM1). IWA Scientific and Technical Report No 13, IWA Publishing, London, UK.
 * Gernaey, K.V., Jeppsson, U., Vanrolleghem, P.A. & Copp, J.B. (2014). Benchmarking of Control Strategies for Wastewater Treatment Plants. IWA Scientific and Technical Report No. 23, IWA Publishing, London, UK.
+* Ramirez, I., Mottet, A., Carrère, H., Déléris, S., Vedrenne, F., Steyer, J. (2009). Modified ADM1 disintegration/hydrolysis structures for modeling batch thermophilic anaerobic digestion of thermally pretreated waste activated sludge. Water Research 43, Nr. 14: 3479–92.
+* Flores-Alsina, X., Solon, K., Mbamba, C.K., Tait, S., Gernaey, K.V., Jeppsson, U., Batstone, D.J. (2016). Modelling Phosphorus (P), Sulfur (S) and Iron (Fe) Interactions for Dynamic Simulations of Anaerobic Digestion Processes. Water Research 95, 370–82.
 
 
 #License

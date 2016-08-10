@@ -55,6 +55,9 @@ public class DigesterParameters {
 	private double T_base, T_op, pK_w_base, pK_a_va_base, pK_a_bu_base, pK_a_pro_base, pK_a_ac_base, pK_a_co2_base, pK_a_IN_base;
 	private double k_A_Bva, k_A_Bbu, k_A_Bpro, k_A_Bac, k_A_Bco2, k_A_BIN;
 	private double k_P, kLa, K_H_h2o_base, K_H_co2_base, K_H_ch4_base, K_H_h2_base;
+	// Modified ADM1 parameters (Disintegration and Hydrolysis)
+	private double k_m_xc, K_s_xc, k_dec_xc, k_m_ch, K_s_ch, k_dec_ch, k_m_pr, K_s_pr, k_dec_pr, k_m_li, K_s_li, k_dec_li, Y_xc, Y_ch, Y_pr, Y_li;
+	
 	private double V_liq, V_gas;
 	
 	/** 
@@ -164,6 +167,32 @@ public class DigesterParameters {
 		k_P=5.0e4;				// 97. Pipe resistance coefficient (m3 d-1 bar-1)
 		V_liq=3400.0; 			// 98. Size of AD liquid portion in m3
 		V_gas=300.0; 			// 99. Size of AD gas portion in m3
+		/**
+		 * Modified ADM1 additional parameters for disintegration and hydrolysis according to:
+		 * 
+		 * Ramirez, Ivan, Alexis Mottet, Hélène Carrère, Stéphane Déléris, Fabien Vedrenne, und Jean-Philippe Steyer. 
+		 * „Modified ADM1 disintegration/hydrolysis structures for modeling batch thermophilic anaerobic digestion of thermally pretreated waste activated sludge“.
+		 * Water Research 43, Nr. 14 (August 2009): 3479–92. doi:10.1016/j.watres.2009.05.023.
+		 * 
+		 * Table 2
+		 * 
+		 */
+		k_m_xc=1.75;			// 100. Maximum specific uptake rate composite
+		K_s_xc=0.3;				// 101. Half saturation value composite
+		k_dec_xc=0.01;			// 102. Decay rate composite
+		k_m_ch=10.0;			// 103. Maximum specific uptake rate carbohydrates
+		K_s_ch=0.5;				// 104. Half saturation value carbohydrates
+		k_dec_ch=0.01;			// 105. Decay rate carbohydrates
+		k_m_pr=10.0;			// 106. Maximum specific uptake rate proteins
+		K_s_pr=0.5;				// 107. Half saturation value proteins
+		k_dec_pr=0.01;			// 108. Decay rate proteins
+		k_m_li=10.0;			// 109. Maximum specific uptake rate lipids
+		K_s_li=0.5;				// 110. Half saturation value lipids
+		k_dec_li=0.01;			// 111. Decay rate lipids
+		Y_xc=0.4;				// 112. Yield of biomass on composites
+		Y_ch=0.1;				// 113. Yield of biomass on carbohydrates
+		Y_pr=0.1;				// 114. Yield of biomass on proteins
+		Y_li=0.1;				// 115. Yield of biomass on lipids
 	}
 	
 	/**
@@ -208,6 +237,8 @@ public class DigesterParameters {
 				f_pr_xc, C_pr, f_li_xc, C_li, f_xI_xc, C_xI, C_su, C_aa, f_fa_li, C_fa, Y_su, f_bu_su, C_bu,
 				f_pro_su, C_pro, f_ac_su, C_ac, C_bac, Y_aa, f_va_aa, C_va, f_bu_aa, f_pro_aa, f_ac_aa, Y_fa,
 				Y_c4, Y_pro, Y_ac, C_ch4, Y_h2, f_h2_su, f_h2_aa, N_xc, N_I, N_aa, N_bac, k_P, V_liq, V_gas,
+				// Modified ADM1
+				k_m_xc, K_s_xc, k_dec_xc, k_m_ch, K_s_ch, k_dec_ch, k_m_pr, K_s_pr, k_dec_pr, k_m_li, K_s_li, k_dec_li, Y_xc, Y_ch, Y_pr, Y_li
 				};
 	}
 	
@@ -315,5 +346,22 @@ public class DigesterParameters {
 		k_P=param[97];
 		V_liq=param[98];
 		V_gas=param[99];
+		// Modified ADM1
+		k_m_xc=param[100];
+		K_s_xc=param[101];
+		k_dec_xc=param[102];
+		k_m_ch=param[103];
+		K_s_ch=param[104];
+		k_dec_ch=param[105];
+		k_m_pr=param[106];
+		K_s_pr=param[107];
+		k_dec_pr=param[108];
+		k_m_li=param[109];
+		K_s_li=param[110];
+		k_dec_li=param[111];
+		Y_xc=param[112];
+		Y_ch=param[113];
+		Y_pr=param[114];
+		Y_li=param[115];
 	}
 }

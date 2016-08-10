@@ -17,14 +17,15 @@ public class BSM2Defaults {
 	/*
 	 * Dynamic State Variables
 	 */
-	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I;//, S_IP;
-	private double X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I;//, X_PHA, X_PP, X_PAO;
+	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I, S_IP;
+	private double X_xc, X_xch, X_xpr, X_xli, X_c, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I, X_PHA, X_PP, X_PAO;
 	private double S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4, S_gas_co2;
-	private double Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2;//, temp3;
+	private double Q_D, T_D, gas_ch4, gas_vol, ph;
+	private double temp1, temp2, temp3;
 	
 	public double[] DigesterInit() {
 		/*
-		 * Digester Initialisation - Outputs (42 Variables)
+		 * Digester Initialisation - Outputs (50 Variables)
 		 */
 		// array position, (ADM1 id), description, (units)
 		S_su =  0.012; // 0.	(1) monosaccharides (kg COD/m3)[g COD/L]
@@ -40,10 +41,10 @@ public class BSM2Defaults {
 		S_IN = 0.13; // 10. 	(11) inorganic nitrogen (kmole N/m3)
 		S_I = 0.033; // 11. 	(12) soluble inerts (kg COD/m3)[g COD/L]
 		// Particulates ---->
-		X_xc = 0.31; // 12. 	(13) composites (kg COD/m3)[g COD/L]
-		X_ch = 0.028; // 13. 	(14) carbohydrates (kg COD/m3)[g COD/L]
-		X_pr = 0.1; // 14. 		(15) proteins (kg COD/m3)[g COD/L]
-		X_li = 0.029; // 15. 	(16) lipids (kg COD/m3)	[g COD/L]	
+		X_xc = 0.0;//0.31; // 12. 	(13) composites (kg COD/m3)[g COD/L]
+		X_ch = 0.0;//0.028; // 13. 	(14) carbohydrates (kg COD/m3)[g COD/L]
+		X_pr = 0.0;//0.1; // 14. 		(15) proteins (kg COD/m3)[g COD/L]
+		X_li = 0.0;//0.029; // 15. 	(16) lipids (kg COD/m3)	[g COD/L]	
 		X_su = 0.42; // 16. 	(17) sugar degraders (kg COD/m3)[g COD/L]
 		X_aa = 1.18; // 17. 	(18) amino acid degraders (kg COD/m3)[g COD/L]
 		X_fa = 0.24; // 18.  	(19) LCFA degraders (kg COD/m3)[g COD/L]
@@ -66,30 +67,36 @@ public class BSM2Defaults {
 		S_gas_co2 = 0.014; // 34. carbon dioxide concentration in gas phase (kmole C/m3)[mol C/L]
 		Q_D = 0.0; // 35. flow rate (m3/d) - Set by influent
 		T_D = 35.0; // 36. digester temperature (deg C)
-		gas_ch4 = 0.0; // 37. Fraction methane in gas phase
+		gas_ch4 = 0.0; // 37. methane volume (m3/d)
 		gas_vol = 0.0; // 38. gas volume (m3/d)
 		ph = 0.0; // 39. pH
-		temp1 = 0.0; //40. Optional
-		temp2 = 0.0; // 41. Optional
-		/*
+		// Modified ADM1 (Disintegration and Hydrolysis)
+		X_c = 0.31; 	  	// 40. Particulate compound concentration composite (kg COD/m3)[g COD/L]
+		X_xch = 0.028; 		// 41. Hydrolytic (disintegration) biomass concentration carbohydrate (kg COD/m3)[g COD/L]
+		X_xpr = 0.1; 		// 42. Hydrolytic (disintegration) biomass concentration protein (kg COD/m3)[g COD/L]
+		X_xli = 0.029; 		// 43. Hydrolytic (disintegration) biomass concentration lipid (kg COD/m3)[g COD/L]
 		// Bio P Reactions ----->
-		S_IP = 0.0; // 42. Inorganic phosphorus (ADM1) (kmole P/m3)
-		X_PHA = 0.0; // 43. Polyhydroxyalkanoates (kg COD/m3)[g COD/L]
-		X_PP = 0.0; // 44. Polyphosphates (kg COD/m3)[g COD/L]
-		X_PAO = 0.0; // 45. Phosphorus accumulating organisms (kg COD/m3)[g COD/L]
-		temp3 = 0.0; // 46. Optional
+		S_IP = 0.0; // 44. Inorganic phosphorus (ADM1) (kmole P/m3)
+		X_PHA = 0.0; // 45. Polyhydroxyalkanoates (kg COD/m3)[g COD/L]
+		X_PP = 0.0; // 46. Polyphosphates (kg COD/m3)[g COD/L]
+		X_PAO = 0.0; // 47. Phosphorus accumulating organisms (kg COD/m3)[g COD/L]
 		// <---- Bio P Reactions
-		*/
+		temp1 = 0.0; // 48. Optional
+		temp2 = 0.0; // 49. Optional
+		temp3 = 0.0; // 50. Optional
+		
 		
 		return new double[] { S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4,
 				S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
 				X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
-				S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2 };
+				S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph,
+				X_c, X_xch, X_xpr, X_xli, S_IP, X_PHA, X_PP, X_PAO, 
+				temp1, temp2, temp3};
 	}
 	
 	public double[] Influent() {
 		/*
-		 * Digester Influent (42 Variables)
+		 * Digester Influent (50 Variables)
 		 */
 		// array position, (ADM1 id), description, (units)
 		S_su =  0.01; // 0.		(1) monosaccharides (kg COD/m3)[g COD/L]
@@ -136,13 +143,27 @@ public class BSM2Defaults {
 		gas_ch4 = 0.0; // 37. Fraction methane in gas phase
 		gas_vol = 0.0; // 38. gas volume (m3/d)
 		ph = 0.0; // 39. pH
-		temp1 = 0.0; // 40. Optional
-		temp2 = 0.0; // 41. Optional
+		// Modified ADM1 (Disintegration and Hydrolysis)
+		X_c = 0.0; 	  //40. Particulate compound concentration composite
+		X_xch = 0.0; // 41. Hydrolytic (disintegration) biomass concentration carbohydrate
+		X_xpr = 0.0; // 42. Hydrolytic (disintegration) biomass concentration protein
+		X_xli = 0.0; // 43. Hydrolytic (disintegration) biomass concentration lipid
+		// Bio P Reactions ----->
+		S_IP = 0.0; // 44. Inorganic phosphorus (ADM1) (kmole P/m3)
+		X_PHA = 0.0; // 45. Polyhydroxyalkanoates (kg COD/m3)[g COD/L]
+		X_PP = 0.0; // 46. Polyphosphates (kg COD/m3)[g COD/L]
+		X_PAO = 0.0; // 47. Phosphorus accumulating organisms (kg COD/m3)[g COD/L]
+		// <---- Bio P Reactions
+		temp1 = 0.0; // 48. Optional
+		temp2 = 0.0; // 49. Optional
+		temp3 = 0.0; // 50. Optional
 		
 		return new double[] { S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4,
 				S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
 				X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
-				S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph, temp1, temp2 };
+				S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph,
+				X_c, X_xch, X_xpr, X_xli, S_IP, X_PHA, X_PP, X_PAO, 
+				temp1, temp2, temp3};
 	}
 
 }

@@ -49,11 +49,12 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 	private double eps, phi, S_H_ion;
 	private double proc1, proc2, proc3, proc4, proc5, proc6, proc7, proc8, proc9, proc10, proc11, proc12, proc13;
 	private double proc14, proc15, proc16, proc17, proc18, proc19;
+	private double proc20, proc21, proc22, proc23;
 	private double procT8, procT9, procT10;
 	private double I_pH_aa, I_pH_ac, I_pH_h2, I_IN_lim, I_h2_fa, I_h2_c4, I_h2_pro, I_nh3;
 	private double reac1, reac2, reac3, reac4, reac5, reac6, reac7, reac8, reac9, reac10, reac11, reac12, reac13;
-	private double reac14, reac15, reac16, reac17, reac18, reac19, reac20, reac21, reac22, reac23, reac24;//, reac25;
-	//private double reac26, reac27, reac28;
+	private double reac14, reac15, reac16, reac17, reac18, reac19, reac20, reac21, reac22, reac23, reac24, reac25;
+	private double reac26, reac27, reac28;
 	private double stoich1, stoich2, stoich3, stoich4, stoich5, stoich6, stoich7, stoich8, stoich9, stoich10, stoich11, stoich12, stoich13;
 	private double p_gas_h2o, P_gas, p_gas_h2, p_gas_ch4, p_gas_co2, q_gas;
 	private double pHLim_aa, pHLim_ac, pHLim_h2, n_aa, n_ac, n_h2;
@@ -138,7 +139,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 	public void computeDerivatives(double t, double[] x, double[] dx)
 			throws MaxCountExceededException, DimensionMismatchException {	
 		for (int i=0;i<x.length;i++) {
-			if (x[i]<0) {
+			if (x[i]<0 || Double.isNaN(x[i])) {
 				xtemp[i] = 0.0;
 			} else {
 				xtemp[i] = x[i];
@@ -201,10 +202,10 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		inhib[5] = I_pH_h2*I_IN_lim; // Inhibition Equation 12	
 		
 		// Biochemical process rates
-		proc1 = param[24]*xtemp[12]; // k_dis*X_xc, Disintegration
-		proc2 = param[25]*xtemp[13]; // k_hyd_ch*X_ch, Hydrolysis of carbohydrates
-		proc3 = param[26]*xtemp[14]; // k_hyd_pr*X_pr, Hydrolysis of proteins
-		proc4 = param[27]*xtemp[15]; // k_hyd_li*X_li, Hydrolysis of lipids
+		//proc1 = param[24]*xtemp[12]; // k_dis*X_xc, Disintegration
+		//proc2 = param[25]*xtemp[13]; // k_hyd_ch*X_ch, Hydrolysis of carbohydrates
+		//proc3 = param[26]*xtemp[14]; // k_hyd_pr*X_pr, Hydrolysis of proteins
+		//proc4 = param[27]*xtemp[15]; // k_hyd_li*X_li, Hydrolysis of lipids
 		proc5 = param[28]*xtemp[0]/(param[29]+xtemp[0])*xtemp[16]*inhib[0]; // k_m_su*(S_su/(K_S_su+S_su))*X_su*inhib_5, Uptake of sugars
 		proc6 = param[30]*xtemp[1]/(param[31]+xtemp[1])*xtemp[17]*inhib[0]; // k_m_aa*(S_aa/(K_S_aa+S_aa))*X_aa*inhib_6, Uptake of amino acids
 		proc7 = param[32]*xtemp[2]/(param[33]+xtemp[2])*xtemp[18]*inhib[1]; // k_m_fa*(S_fa/(K_S_fa+S_fa))*X_aa*inhib_7, Uptake of LCFA
@@ -221,17 +222,64 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		proc18 = param[47]*xtemp[21]; // k_dec_Xac*X_ac, Decay of X_ac
 		proc19 = param[48]*xtemp[22]; // k_dec_Xh2*X_h2, Decay of X_h2
 		
+		/**
+		 * Modified Hydrolysis and Disintegration according to:
+		 * 
+		 * Ramirez, Ivan, Alexis Mottet, Hélène Carrère, Stéphane Déléris, Fabien Vedrenne, und Jean-Philippe Steyer. 
+		 * „Modified ADM1 disintegration/hydrolysis structures for modeling batch thermophilic anaerobic digestion of thermally pretreated waste activated sludge“.
+		 * Water Research 43, Nr. 14 (August 2009): 3479–92. doi:10.1016/j.watres.2009.05.023.
+		 * 
+		 * 
+		 *** PARAMS ***
+		k_m_xc=0.0;				// 100. Maximum specific uptake rate composite
+		K_s_xc=0.0;				// 101. Half saturation value composite
+		k_dec_xc=0.0;			// 102. Decay rate composite
+		k_m_ch=0.0;				// 103. Maximum specific uptake rate carbohydrates
+		K_s_ch=0.0;				// 104. Half saturation value carbohydrates
+		k_dec_ch=0.0;			// 105. Decay rate carbohydrates
+		k_m_pr=0.0;				// 106. Maximum specific uptake rate proteins
+		K_s_pr=0.0;				// 107. Half saturation value proteins
+		k_dec_pr=0.0;			// 108. Decay rate proteins
+		k_m_li=0.0;				// 109. Maximum specific uptake rate lipids
+		K_s_li=0.0;				// 110. Half saturation value lipids
+		k_dec_li=0.0;			// 111. Decay rate lipids
+		Y_xc=0.0;				// 112. Yield of biomass on composites
+		Y_ch=0.0;				// 113. Yield of biomass on carbohydrates
+		Y_pr=0.0;				// 114. Yield of biomass on proteins
+		Y_li=0.0;				// 115. Yield of biomass on lipids
+		 *** VARS ***
+		X_c = 0.0; 	  			// 40. Particulate compound concentration composite
+		X_xch = 0.0; 			// 41. Hydrolytic (disintegration) biomass concentration carbohydrate
+		X_xpr = 0.0; 			// 42. Hydrolytic (disintegration) biomass concentration protein
+		X_xli = 0.0; 			// 43. Hydrolytic (disintegration) biomass concentration lipid
+		 * 
+		 */
+		proc1 = param[100]*(xtemp[40]/(param[101]*xtemp[12]+xtemp[40]))*xtemp[12]; 	// k_m_xc*(X_c/(K_s_xc*X_xc+X_c))*X_xc
+		proc2 = param[103]*(xtemp[13]/(param[104]*xtemp[41]+xtemp[13]))*xtemp[41];	// k_m_ch*(X_ch/(K_s_ch*X_xch+X_ch))*X_xch
+		proc3 = param[106]*(xtemp[14]/(param[107]*xtemp[42]+xtemp[14]))*xtemp[42];	// k_m_pr*(X_pr/(K_s_pr*X_xpr+X_pr))*X_xpr
+		proc4 = param[109]*(xtemp[15]/(param[110]*xtemp[43]+xtemp[15]))*xtemp[43];	// k_m_li*(X_li/(K_s_li*X_xli+X_li))*X_xli
+		proc20 = param[102]*xtemp[12];	// k_dec_xc*X_xc
+		proc21 = param[105]*xtemp[41];	// k_dec_ch*X_xch
+		proc22 = param[108]*xtemp[42];	// k_dec_pr*X_xpr;
+		proc23 = param[111]*xtemp[43];	// k_dec_li*X_xli;
+		
 		// Gas transfer rates
 		procT8 = param[55]*(xtemp[7]-16.0*K_H_h2*p_gas_h2); // kLa*(S_h2-16.0*K_H_h2*p_gas_h2)
 		procT9 = param[55]*(xtemp[8]-64.0*K_H_ch4*p_gas_ch4); // kLa*(S_ch4-64.0*K_H_ch4*p_gas_ch4)
 		procT10 = param[55]*((xtemp[9]-xtemp[30])-K_H_co2*p_gas_co2); // kLa*((S_IC-S_hco3)-K_H_co2*p_gas_co2)
 		
 		// Reactions
-		// reac1 = proc2+(1.0-f_fa_li)*proc4-proc5;
-		reac1 = proc2+(1.0-param[69])*proc4-proc5;
-		reac2 = proc3-proc6;
-		// reac3 = f_fa_li*proc4-proc7;
-		reac3 = param[69]*proc4-proc7;
+		// reac1 = proc2+(1.0-f_fa_li)*proc4-proc5; * BSM2 *
+		//reac1 = proc2+(1.0-param[69])*proc4-proc5; 
+		// reac1 = (1.0-Y_ch)*proc2+(1.0-Y_li)*(1.0-f_fa_li)*proc4-proc5; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac1 = (1.0-param[113])*proc2+(1.0-param[115])*(1.0-param[69])*proc4-proc5;
+		//reac2 = proc3-proc6; * BSM2 *
+		// reac2 = (1.0-Y_pr)*proc3-proc6; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac2 = (1.0-param[114])*proc3-proc6;
+		// reac3 = f_fa_li*proc4-proc7; * BSM2 *
+		//reac3 = param[69]*proc4-proc7;
+		// reac3 = (1.0-Y_li)*f_fa_li*proc4-proc7; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac3 = (1.0-param[115])*param[69]*proc4-proc7;
 		// reac4 = (1.0-Y_aa)*f_va_aa*proc6-proc8;
 		reac4 = (1.0-param[79])*param[80]*proc6-proc8;
 		//reac5 = (1.0-Y_su)*f_bu_su*proc5+(1.0-Y_aa)*f_bu_aa*proc6-proc9;
@@ -247,15 +295,24 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		reac10 = -stoich1*proc1-stoich2*proc2-stoich3*proc3-stoich4*proc4-stoich5*proc5-stoich6*proc6-stoich7*proc7-stoich8*proc8-stoich9*proc9-stoich10*proc10-stoich11*proc11-stoich12*proc12-stoich13*proc13-stoich13*proc14-stoich13*proc15-stoich13*proc16-stoich13*proc17-stoich13*proc18-stoich13*proc19-procT10;
 		// reac11 = (N_xc-f_xI_xc*N_I-f_sI_xc*N_I-f_pr_xc*N_aa)*proc1-Y_su*N_bac*proc5+(N_aa-Y_aa*N_bac)*proc6-Y_fa*N_bac*proc7-Y_c4*N_bac*proc8-Y_c4*N_bac*proc9-Y_pro*N_bac*proc10-Y_ac*N_bac*proc11-Y_h2*N_bac*proc12+(N_bac-N_xc)*(proc13+proc14+proc15+proc16+proc17+proc18+proc19);
 		reac11 = -(param[93]-param[65]*param[94]-param[57]*param[94]-param[61]*param[95])*proc1-param[71]*param[96]*proc5+(param[95]-param[79]*param[96])*proc6-param[85]*param[96]*proc7-param[86]*param[96]*proc8-param[86]*param[96]*proc9-param[87]*param[96]*proc10-param[88]*param[96]*proc11-param[90]*param[96]*proc12+(param[96]-param[93])*(proc13+proc14+proc15+proc16+proc17+proc18+proc19);
-		// reac12 = f_sI_xc*proc1;
-		reac12 = param[57]*proc1;
-		reac13 = -proc1+proc13+proc14+proc15+proc16+proc17+proc18+proc19;
-		// reac14 = f_ch_xc*proc1-proc2;
-		reac14 = param[59]*proc1-proc2;
-		// reac15 = f_pr_xc*proc1-proc3;
-		reac15 = param[61]*proc1-proc3;
-		// reac16 = f_li_xc*proc1-proc4;
-		reac16 = param[63]*proc1-proc4;
+		// reac12 = f_sI_xc*proc1; * BSM2 *
+		//reac12 = param[57]*proc1;
+		// reac12 = (1.0-Y_xc)*f_sI_xc*proc1; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac12 = (1.0-param[112])*param[57]*proc1;
+		//reac13 = -proc1+proc13+proc14+proc15+proc16+proc17+proc18+proc19; * BSM2 *
+		reac13 = -proc1+proc13+proc14+proc15+proc16+proc17+proc18+proc19+proc20+proc21+proc22+proc23; // *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		// reac14 = f_ch_xc*proc1-proc2; * BSM2 *
+		//reac14 = param[59]*proc1-proc2;
+		// reac14 = (1.0-Y_xc)*f_ch_xc*proc1-proc2; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac14 = (1.0-param[112])*param[59]*proc1-proc2;
+		// reac15 = f_pr_xc*proc1-proc3; * BSM2 *
+		//reac15 = param[61]*proc1-proc3;
+		// reac15 = (1.0-Y_xc)*f_pr_xc*proc1-proc3; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac15 = (1.0-param[112])*param[61]*proc1-proc3;
+		// reac16 = f_li_xc*proc1-proc4; * BSM2 *
+		//reac16 = param[63]*proc1-proc4;
+		// reac16 = (1.0-Y_xc)f_li_xc*proc1-proc4;  *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac16 = (1.0-param[112])*param[63]*proc1-proc4;
 		// reac17 = Y_su*proc5-proc13;
 		reac17 = param[71]*proc5-proc13;
 		// reac18 = Y_aa*proc6-proc14;
@@ -270,8 +327,18 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		reac22 = param[88]*proc11-proc18;
 		// reac23 = Y_h2*proc12-proc19;
 		reac23 = param[90]*proc12-proc19;
-		// reac24 = f_xI_xc*proc1;
-		reac24 = param[65]*proc1;
+		// reac24 = f_xI_xc*proc1; * BSM2 *
+		//reac24 = param[65]*proc1;
+		// reac24 = Y_xc*proc1-proc20; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac24 = param[112]*proc1-proc20;
+		// reac25 = Y_ch*proc2-proc21; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac25 = param[113]*proc2-proc21;
+		// reac26 = Y_pr*proc3-proc22; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac26 = param[114]*proc3-proc22;
+		// reac27 = Y_li*proc4-proc23; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac27 = param[115]*proc4-proc23;
+		// reac28 = (1.0-Y_xc)*f_xI_xc*proc1; *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		reac28 = (1.0-param[112])*param[65]*proc1;
 		
 		q_gas = param[97]*(P_gas-P_atm);
 		if (q_gas < 0)
@@ -279,39 +346,39 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 			   
 		// DE's -> Soluble matter
 		// dSsu/dt = Qad/Vad,liq(Ssu,i-Ssu)+reac1
-		dx[0] = (x[35]/param[98])*(u[0]-x[0])+reac1; // Ssu
-		dx[1] = (x[35]/param[98])*(u[1]-x[1])+reac2; // Saa
-		dx[2] = (x[35]/param[98])*(u[2]-x[2])+reac3; // Sfa
-		dx[3] = (x[35]/param[98])*(u[3]-x[3])+reac4; // Sva
-		dx[4] = (x[35]/param[98])*(u[4]-x[4])+reac5; // Sbu
-		dx[5] = (x[35]/param[98])*(u[5]-x[5])+reac6; // Spro
-		dx[6] = (x[35]/param[98])*(u[6]-x[6])+reac7; // Sac
+		dx[0] = (x[35]/param[98])*(u[0]-xtemp[0])+reac1; // Ssu
+		dx[1] = (x[35]/param[98])*(u[1]-xtemp[1])+reac2; // Saa
+		dx[2] = (x[35]/param[98])*(u[2]-xtemp[2])+reac3; // Sfa
+		dx[3] = (x[35]/param[98])*(u[3]-xtemp[3])+reac4; // Sva
+		dx[4] = (x[35]/param[98])*(u[4]-xtemp[4])+reac5; // Sbu
+		dx[5] = (x[35]/param[98])*(u[5]-xtemp[5])+reac6; // Spro
+		dx[6] = (x[35]/param[98])*(u[6]-xtemp[6])+reac7; // Sac
 
 		if (!sh2DAE) {	
-			dx[7] = (x[35]/param[98])*(u[7]-x[7])+reac8; // Sh2
+			dx[7] = (x[35]/param[98])*(u[7]-xtemp[7])+reac8; // Sh2
 		} 
 				
-		dx[8] = (x[35]/param[98])*(u[8]-x[8])+reac9; // Sch4
-		dx[9] = (x[35]/param[98])*(u[9]-x[9])+reac10;    // SIC
-		dx[10] = (x[35]/param[98])*(u[10]-x[10])+reac11; // SIN
-		dx[11] = (x[35]/param[98])*(u[11]-x[11])+reac12; // SI
+		dx[8] = (x[35]/param[98])*(u[8]-xtemp[8])+reac9; // Sch4
+		dx[9] = (x[35]/param[98])*(u[9]-xtemp[9])+reac10;    // SIC
+		dx[10] = (x[35]/param[98])*(u[10]-xtemp[10])+reac11; // SIN
+		dx[11] = (x[35]/param[98])*(u[11]-xtemp[11])+reac12; // SI
 		
 		// DE's -> Particulate matter
-		dx[12] = (x[35]/param[98])*(u[12]-x[12])+reac13; // Xc
-		dx[13] = (x[35]/param[98])*(u[13]-x[13])+reac14; // Xch
-		dx[14] = (x[35]/param[98])*(u[14]-x[14])+reac15; // Xpr
-		dx[15] = (x[35]/param[98])*(u[15]-x[15])+reac16; // Xli
-		dx[16] = (x[35]/param[98])*(u[16]-x[16])+reac17; // Xsu
-		dx[17] = (x[35]/param[98])*(u[17]-x[17])+reac18; // Xaa
-		dx[18] = (x[35]/param[98])*(u[18]-x[18])+reac19; // Xfa
-		dx[19] = (x[35]/param[98])*(u[19]-x[19])+reac20; // Xc4
-		dx[20] = (x[35]/param[98])*(u[20]-x[20])+reac21; // Xpro
-		dx[21] = (x[35]/param[98])*(u[21]-x[21])+reac22; // Xac
-		dx[22] = (x[35]/param[98])*(u[22]-x[22])+reac23; // Xh2
-		dx[23] = (x[35]/param[98])*(u[23]-x[23])+reac24; // XI
+		dx[12] = (x[35]/param[98])*(u[12]-xtemp[12])+reac13; // Xc
+		dx[13] = (x[35]/param[98])*(u[13]-xtemp[13])+reac14; // Xch
+		dx[14] = (x[35]/param[98])*(u[14]-xtemp[14])+reac15; // Xpr
+		dx[15] = (x[35]/param[98])*(u[15]-xtemp[15])+reac16; // Xli
+		dx[16] = (x[35]/param[98])*(u[16]-xtemp[16])+reac17; // Xsu
+		dx[17] = (x[35]/param[98])*(u[17]-xtemp[17])+reac18; // Xaa
+		dx[18] = (x[35]/param[98])*(u[18]-xtemp[18])+reac19; // Xfa
+		dx[19] = (x[35]/param[98])*(u[19]-xtemp[19])+reac20; // Xc4
+		dx[20] = (x[35]/param[98])*(u[20]-xtemp[20])+reac21; // Xpro
+		dx[21] = (x[35]/param[98])*(u[21]-xtemp[21])+reac22; // Xac
+		dx[22] = (x[35]/param[98])*(u[22]-xtemp[22])+reac23; // Xh2
+		dx[23] = (x[35]/param[98])*(u[23]-xtemp[23])+reac28; // XI
 
-		dx[24] = (x[35]/param[98])*(u[24]-x[24]); // Scat+
-		dx[25] = (x[35]/param[98])*(u[25]-x[25]); // San-
+		dx[24] = (x[35]/param[98])*(u[24]-xtemp[24]); // Scat+
+		dx[25] = (x[35]/param[98])*(u[25]-xtemp[25]); // San-
 		
 		// Acid-base process rates for ODE
 		//k_A_Bva*(S_hva*(K_A_va+S_H_ion)-K_a_va*S_va)
@@ -334,23 +401,21 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		dx[32] = -xtemp[32]*q_gas/param[99]+procT8*param[98]/param[99]; // Sgas,h2
 		dx[33] = -xtemp[33]*q_gas/param[99]+procT9*param[98]/param[99]; // Sgas,ch4
 		dx[34] = -xtemp[34]*q_gas/param[99]+procT10*param[98]/param[99]; // Sgas,co2
-
-		dx[35] = 0; // Flow
-		dx[36] = 0; // Temp
 		
 		// Correction by factor of 64.0 due to COD basis of Sgas,ch4
 		xtemp[37] = (q_gas*xtemp[33])*R*(273.15+xtemp[36])/64.0; // Methane gas (m3/d)
-		
-		//System.out.println(t+"; sch4="+xtemp[8]+"; sgasch4="+xtemp[33]);
 
 		xtemp[38] = q_gas;	// Gas production (m3/d)
 				
 		xtemp[39] = -Math.log10(S_H_ion); // pH
+
+		//  *** Modified ADM1 (Disintegration and Hydrolysis) ***
+		dx[40] = (x[35]/param[98])*(u[40]-xtemp[40])+reac24; // X_c 
+		dx[41] = (x[35]/param[98])*(u[41]-xtemp[41])+reac25; // X_xch
+		dx[42] = (x[35]/param[98])*(u[42]-xtemp[42])+reac26; // X_xpr
+		dx[43] = (x[35]/param[98])*(u[43]-xtemp[43])+reac27; // X_xli	
 		
-		xtemp[40] = 0; 
-		xtemp[41] = 0;
-		
-		// Bio P Reactions
+		// *** Bio P Reactions ***
 		// P Removal Equations
 		/*
 		reac25 = -stoich1_p*proc1-stoich2_p*proc2-stoich3_p*proc3-stoich4_p*proc4-stoich5_p*proc5- stoich6_p*proc6-
@@ -482,6 +547,6 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 
 	@Override
 	public int getDimension() {
-		return 42;
+		return 51;
 	}
 }

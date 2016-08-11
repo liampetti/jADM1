@@ -41,7 +41,7 @@ public class BSM2Defaults {
 		S_IN = 0.13; // 10. 	(11) inorganic nitrogen (kmole N/m3)
 		S_I = 0.033; // 11. 	(12) soluble inerts (kg COD/m3)[g COD/L]
 		// Particulates ---->
-		X_xc = 0.0;//0.31; // 12. 	(13) composites (kg COD/m3)[g COD/L]
+		X_xc = 0.0;//0.31; // 12. 	(13) composites (kg COD/m3)[g COD/L] *** NOT USED : direct mapping from biomass decay ***
 		X_ch = 0.0;//0.028; // 13. 	(14) carbohydrates (kg COD/m3)[g COD/L]
 		X_pr = 0.0;//0.1; // 14. 		(15) proteins (kg COD/m3)[g COD/L]
 		X_li = 0.0;//0.029; // 15. 	(16) lipids (kg COD/m3)	[g COD/L]	
@@ -71,7 +71,7 @@ public class BSM2Defaults {
 		gas_vol = 0.0; // 38. gas volume (m3/d)
 		ph = 0.0; // 39. pH
 		// Modified ADM1 (Disintegration and Hydrolysis)
-		X_c = 0.31; 	  	// 40. Particulate compound concentration composite (kg COD/m3)[g COD/L]
+		X_c = 0.31; 	  	// 40. Particulate compound concentration composite (kg COD/m3)[g COD/L] *** NOT USED : direct mapping from biomass decay ***
 		X_xch = 0.028; 		// 41. Hydrolytic (disintegration) biomass concentration carbohydrate (kg COD/m3)[g COD/L]
 		X_xpr = 0.1; 		// 42. Hydrolytic (disintegration) biomass concentration protein (kg COD/m3)[g COD/L]
 		X_xli = 0.029; 		// 43. Hydrolytic (disintegration) biomass concentration lipid (kg COD/m3)[g COD/L]

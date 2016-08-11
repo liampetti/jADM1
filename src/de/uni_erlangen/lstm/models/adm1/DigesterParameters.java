@@ -181,9 +181,11 @@ public class DigesterParameters {
 		 * Table 2
 		 * 
 		 */
+		// NOT USED --->
 		k_m_xc=1.75; 			// 100. Maximum specific uptake rate composite
 		K_s_xc=0.3;				// 101. Half saturation value composite
 		k_dec_xc=0.01;			// 102. Decay rate composite
+		// <--- NOT USED
 		k_m_ch=10.0;			// 103. Maximum specific uptake rate carbohydrates
 		K_s_ch=0.5;				// 104. Half saturation value carbohydrates
 		k_dec_ch=0.01;			// 105. Decay rate carbohydrates

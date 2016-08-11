@@ -57,6 +57,10 @@ public class DigesterParameters {
 	private double k_P, kLa, K_H_h2o_base, K_H_co2_base, K_H_ch4_base, K_H_h2_base;
 	// Modified ADM1 parameters (Disintegration and Hydrolysis)
 	private double k_m_xc, K_s_xc, k_dec_xc, k_m_ch, K_s_ch, k_dec_ch, k_m_pr, K_s_pr, k_dec_pr, k_m_li, K_s_li, k_dec_li, Y_xc, Y_ch, Y_pr, Y_li;
+	// Modified ADM1 Hill function for ammonia inhibiton
+	private double S_nh3_lim, K_nh3, b_nh3, h_nh3;
+	// Modified ADM1 Gas Diffusivity
+	private double D_h2, D_ch4, D_co2;
 	
 	private double V_liq, V_gas;
 	
@@ -177,7 +181,7 @@ public class DigesterParameters {
 		 * Table 2
 		 * 
 		 */
-		k_m_xc=1.75;			// 100. Maximum specific uptake rate composite
+		k_m_xc=1.75; 			// 100. Maximum specific uptake rate composite
 		K_s_xc=0.3;				// 101. Half saturation value composite
 		k_dec_xc=0.01;			// 102. Decay rate composite
 		k_m_ch=10.0;			// 103. Maximum specific uptake rate carbohydrates
@@ -193,6 +197,15 @@ public class DigesterParameters {
 		Y_ch=0.1;				// 113. Yield of biomass on carbohydrates
 		Y_pr=0.1;				// 114. Yield of biomass on proteins
 		Y_li=0.1;				// 115. Yield of biomass on lipids
+		// Ammonia inhibition
+		S_nh3_lim=4.5e-3;		// 116. Mean free ammonia threshold concentration (kmole N/m3)
+		K_nh3=1.0;				// 117. Ammonia inhibition tuning parameter
+		b_nh3=1.0;				// 118. Maximum value for ammonia inhibition
+		h_nh3=1.0;				// 119. Hill coefficient for ammonia inhibition function drop
+		// Gas Diffusivity {Cussler, E. L. (1997). Diffusion: Mass Transfer in Fluid Systems (2nd ed.). New York: Cambridge University Press. ISBN 0-521-45078-0.}
+		D_h2=4.5e-9;			// 120. Diffusivity of hydrogen gas (m2/s)
+		D_ch4=1.49e-9;			// 121. Diffusivity of methane gas (m2/s)
+		D_co2=1.92e-9;			// 122. Diffusivity of carbon dioxide gas (m2/s)
 	}
 	
 	/**
@@ -238,7 +251,11 @@ public class DigesterParameters {
 				f_pro_su, C_pro, f_ac_su, C_ac, C_bac, Y_aa, f_va_aa, C_va, f_bu_aa, f_pro_aa, f_ac_aa, Y_fa,
 				Y_c4, Y_pro, Y_ac, C_ch4, Y_h2, f_h2_su, f_h2_aa, N_xc, N_I, N_aa, N_bac, k_P, V_liq, V_gas,
 				// Modified ADM1
-				k_m_xc, K_s_xc, k_dec_xc, k_m_ch, K_s_ch, k_dec_ch, k_m_pr, K_s_pr, k_dec_pr, k_m_li, K_s_li, k_dec_li, Y_xc, Y_ch, Y_pr, Y_li
+				k_m_xc, K_s_xc, k_dec_xc, k_m_ch, K_s_ch, k_dec_ch, k_m_pr, K_s_pr, k_dec_pr, k_m_li, K_s_li, k_dec_li, Y_xc, Y_ch, Y_pr, Y_li,
+				// Ammonia inhibition
+				S_nh3_lim, K_nh3, b_nh3, h_nh3,
+				// Gas Diffusivity
+				D_h2, D_ch4, D_co2
 				};
 	}
 	
@@ -363,5 +380,12 @@ public class DigesterParameters {
 		Y_ch=param[113];
 		Y_pr=param[114];
 		Y_li=param[115];
+		S_nh3_lim=param[116];
+		K_nh3=param[117];
+		b_nh3=param[118];
+		h_nh3=param[119];
+		D_h2=param[120];
+		D_ch4=param[121];
+		D_co2=param[122];
 	}
 }

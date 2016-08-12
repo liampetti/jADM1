@@ -263,9 +263,9 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		proc3 = param[106]*(xtemp[14]/(param[107]*xtemp[42]+xtemp[14]))*xtemp[42];	// k_m_pr*(X_pr/(K_s_pr*X_xpr+X_pr))*X_xpr
 		proc4 = param[109]*(xtemp[15]/(param[110]*xtemp[43]+xtemp[15]))*xtemp[43];	// k_m_li*(X_li/(K_s_li*X_xli+X_li))*X_xli
 		//proc20 = param[102]*xtemp[12];	// k_dec_xc*X_xc // *** Modified :direct mapping from biomass decay
-		proc21 = param[105]*xtemp[41];	// k_dec_ch*X_xch
-		proc22 = param[108]*xtemp[42];	// k_dec_pr*X_xpr;
-		proc23 = param[111]*xtemp[43];	// k_dec_li*X_xli;
+		proc21 = param[105]*xtemp[41];	// k_dec_ch*X_xch, Decay of X_xch 
+		proc22 = param[108]*xtemp[42];	// k_dec_pr*X_xpr, Decay of X_xpr 
+		proc23 = param[111]*xtemp[43];	// k_dec_li*X_xli, Decay of X_xli 
 
 		// Gas transfer rates *** Modified ADM1 (Disintegration and Hydrolysis) - Liquid/Gas Transfers ***
 		procT8 = param[55]*Math.pow((param[120]/param[122]), 0.5)*(xtemp[7]-16.0*K_H_h2*p_gas_h2); // kLa*(S_h2-16.0*K_H_h2*p_gas_h2)
@@ -303,21 +303,21 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		//reac12 = param[57]*proc1;
 		// reac12 = (1.0-Y_xc)*f_sI_xc*proc1; *** Modified ADM1 (Disintegration and Hydrolysis) ***
 		//reac12 = (1.0-param[112])*param[57]*proc1;
-		reac12 = param[57]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19);       // *** Modified :direct mapping from biomass decay
+		reac12 = param[57]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19+proc21+proc22+proc23);       // *** Modified :direct mapping from biomass decay
 		//reac13 = -proc1+proc13+proc14+proc15+proc16+proc17+proc18+proc19; * BSM2 *
 		//reac13 = -proc1+proc13+proc14+proc15+proc16+proc17+proc18+proc19+proc20+proc21+proc22+proc23; // *** Modified ADM1 (Disintegration and Hydrolysis) // *** Modified :direct mapping from biomass decay
 		// reac14 = f_ch_xc*proc1-proc2; * BSM2 *
 		//reac14 = param[59]*proc1-proc2;
 		// reac14 = (1.0-Y_xc)*f_ch_xc*proc1-proc2; *** Modified ADM1 (Disintegration and Hydrolysis) ***
-		reac14 = (1.0-param[112])*param[59]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19)-proc2; // *** Modified :direct mapping from biomass decay
+		reac14 = param[59]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19+proc21+proc22+proc23)-proc2; // *** Modified :direct mapping from biomass decay
 		// reac15 = f_pr_xc*proc1-proc3; * BSM2 *
 		//reac15 = param[61]*proc1-proc3;
 		// reac15 = (1.0-Y_xc)*f_pr_xc*proc1-proc3; *** Modified ADM1 (Disintegration and Hydrolysis) ***
-		reac15 = (1.0-param[112])*param[61]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19)-proc3; // *** Modified :direct mapping from biomass decay
+		reac15 = param[61]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19+proc21+proc22+proc23)-proc3; // *** Modified :direct mapping from biomass decay
 		// reac16 = f_li_xc*proc1-proc4; * BSM2 *
 		//reac16 = param[63]*proc1-proc4;
 		// reac16 = (1.0-Y_xc)f_li_xc*proc1-proc4;  *** Modified ADM1 (Disintegration and Hydrolysis) ***
-		reac16 = (1.0-param[112])*param[63]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19)-proc4; // *** Modified :direct mapping from biomass decay
+		reac16 = param[63]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19+proc21+proc22+proc23)-proc4; // *** Modified :direct mapping from biomass decay
 		
 		
 		// reac17 = Y_su*proc5-proc13;
@@ -338,7 +338,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		//reac24 = param[65]*proc1;
 		// reac24 = Y_xc*proc1-proc20; *** Modified ADM1 (Disintegration and Hydrolysis)
 		//reac24 = param[112]*proc1-proc20;
-		reac24 = param[65]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19); // *** Modified :direct mapping from biomass decay
+		reac24 = param[65]*(proc13+proc14+proc15+proc16+proc17+proc18+proc19+proc21+proc22+proc23); // *** Modified :direct mapping from biomass decay
 		// reac25 = Y_ch*proc2-proc21; *** Modified ADM1 (Disintegration and Hydrolysis) ***
 		reac25 = param[113]*proc2-proc21;
 		// reac26 = Y_pr*proc3-proc22; *** Modified ADM1 (Disintegration and Hydrolysis) ***

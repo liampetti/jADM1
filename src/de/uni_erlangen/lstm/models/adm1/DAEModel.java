@@ -232,29 +232,6 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		 * Water Research 43, Nr. 14 (August 2009): 3479–92. doi:10.1016/j.watres.2009.05.023.
 		 * 
 		 * 
-		 *** PARAMS ***
-		k_m_xc=0.0;				// 100. Maximum specific uptake rate composite
-		K_s_xc=0.0;				// 101. Half saturation value composite
-		k_dec_xc=0.0;			// 102. Decay rate composite
-		k_m_ch=0.0;				// 103. Maximum specific uptake rate carbohydrates
-		K_s_ch=0.0;				// 104. Half saturation value carbohydrates
-		k_dec_ch=0.0;			// 105. Decay rate carbohydrates
-		k_m_pr=0.0;				// 106. Maximum specific uptake rate proteins
-		K_s_pr=0.0;				// 107. Half saturation value proteins
-		k_dec_pr=0.0;			// 108. Decay rate proteins
-		k_m_li=0.0;				// 109. Maximum specific uptake rate lipids
-		K_s_li=0.0;				// 110. Half saturation value lipids
-		k_dec_li=0.0;			// 111. Decay rate lipids
-		Y_xc=0.0;				// 112. Yield of biomass on composites
-		Y_ch=0.0;				// 113. Yield of biomass on carbohydrates
-		Y_pr=0.0;				// 114. Yield of biomass on proteins
-		Y_li=0.0;				// 115. Yield of biomass on lipids
-		 *** VARS ***
-		X_c = 0.0; 	  			// 40. Particulate compound concentration composite
-		X_xch = 0.0; 			// 41. Hydrolytic (disintegration) biomass concentration carbohydrate
-		X_xpr = 0.0; 			// 42. Hydrolytic (disintegration) biomass concentration protein
-		X_xli = 0.0; 			// 43. Hydrolytic (disintegration) biomass concentration lipid
-		 * 
 		 */
 		// No proc1 or proc20, no composite materials
 		//proc1 = param[100]*(xtemp[40]/(param[101]*xtemp[12]+xtemp[40]))*xtemp[12]; 	// k_m_xc*(X_c/(K_s_xc*X_xc+X_c))*X_xc

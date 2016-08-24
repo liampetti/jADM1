@@ -201,7 +201,7 @@ public class DigesterParameters {
 		Y_li=0.1;				// 115. Yield of biomass on lipids
 		// Ammonia inhibition
 		S_nh3_lim=4.5e-3;		// 116. Mean free ammonia threshold concentration (kmole N/m3)
-		K_nh3=1.0;				// 117. Ammonia inhibition tuning parameter
+		K_nh3=0.345;			// 117. Ammonia inhibition tuning parameter
 		b_nh3=1.0;				// 118. Maximum value for ammonia inhibition
 		h_nh3=1.0;				// 119. Hill coefficient for ammonia inhibition function drop
 		// Gas Diffusivity {Cussler, E. L. (1997). Diffusion: Mass Transfer in Fluid Systems (2nd ed.). New York: Cambridge University Press. ISBN 0-521-45078-0.}

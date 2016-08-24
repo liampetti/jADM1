@@ -110,12 +110,12 @@ public class BSM2Defaults {
 		S_ch4 = 1.0e-5; // 8. 	(9) methane gas (kg COD/m3)[g COD/L]
 		S_IC = 0.04; // 9. 		(10) inorganic carbon (kmole C/m3)
 		S_IN = 0.01; // 10. 	(11) inorganic nitrogen (kmole N/m3)
-		S_I = 0.02; // 11. 		(12) soluble inerts (kg COD/m3)[g COD/L]
+		S_I = 0.22; // 11. 		(12) soluble inerts (kg COD/m3)[g COD/L] *** Modified ADM1 - No Composite ***
 		// Particulates ---->
-		X_xc = 2.0; // 12. 		(13) composites (kg COD/m3)[g COD/L]
-		X_ch = 5.0; // 13. 		(14) carbohydrates (kg COD/m3)[g COD/L]
-		X_pr = 20.0; // 14. 	(15) proteins (kg COD/m3)[g COD/L]
-		X_li = 5.0; // 15. 		(16) lipids (kg COD/m3)	[g COD/L]	
+		X_xc = 0.0; // 12. 		(13) composites (kg COD/m3)[g COD/L] *** Modified ADM1 - No Composite ***
+		X_ch = 5.4; // 13. 		(14) carbohydrates (kg COD/m3)[g COD/L] *** Modified ADM1 - No Composite ***
+		X_pr = 20.4; // 14. 	(15) proteins (kg COD/m3)[g COD/L] *** Modified ADM1 - No Composite ***
+		X_li = 5.6; // 15. 		(16) lipids (kg COD/m3)	[g COD/L] *** Modified ADM1 - No Composite ***
 		X_su = 0.0; // 16. 		(17) sugar degraders (kg COD/m3)[g COD/L]
 		X_aa = 0.01; // 17. 	(18) amino acid degraders (kg COD/m3)[g COD/L]
 		X_fa = 0.01; // 18.  	(19) LCFA degraders (kg COD/m3)[g COD/L]
@@ -123,7 +123,7 @@ public class BSM2Defaults {
 		X_pro = 0.01; // 20. 	(21) propionate degraders (kg COD/m3)[g COD/L]
 		X_ac = 0.01; // 21. 	(22) acetate degraders (kg COD/m3)[g COD/L]
 		X_h2 =  0.01; // 22. 	(23) hydrogen degraders (kg COD/m3)[g COD/L]
-		X_I =  25.0;; // 23. 	(24) particulate inerts (kg COD/m3)[g COD/L]
+		X_I =  25.4; // 23. 	(24) particulate inerts (kg COD/m3)[g COD/L] *** Modified ADM1 - No Composite ***
 		// <---- Particulates
 		S_cat =  0.04; // 24. cations (metallic ions, strong base) (kmole/m3)
 		S_an =  0.02; // 25. anions (metallic ions, strong acid) (kmole/m3)

@@ -162,7 +162,12 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		K_a_ac = Math.pow(10,-param[6]);
 		
 		if (fix_pH >= 0) {
+			// S_H_ion based on set pH
+			shDAE = false;
 			S_H_ion = Math.pow(10, -fix_pH);
+			
+			// Run the DAE functions
+			runDAE();
 		} else {
 			// Run the DAE functions
 			runDAE();
@@ -235,7 +240,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		 */
 		// No proc1 or proc20, no composite materials
 		//proc1 = param[100]*(xtemp[40]/(param[101]*xtemp[12]+xtemp[40]))*xtemp[12]; 	// k_m_xc*(X_c/(K_s_xc*X_xc+X_c))*X_xc
-		proc1 = 0.0; // *** Modified :direct mapping from biomass decay
+		//proc1 = 0.0; // *** Modified :direct mapping from biomass decay
 		proc2 = param[103]*(xtemp[13]/(param[104]*xtemp[41]+xtemp[13]))*xtemp[41];	// k_m_ch*(X_ch/(K_s_ch*X_xch+X_ch))*X_xch
 		proc3 = param[106]*(xtemp[14]/(param[107]*xtemp[42]+xtemp[14]))*xtemp[42];	// k_m_pr*(X_pr/(K_s_pr*X_xpr+X_pr))*X_xpr
 		proc4 = param[109]*(xtemp[15]/(param[110]*xtemp[43]+xtemp[15]))*xtemp[43];	// k_m_li*(X_li/(K_s_li*X_xli+X_li))*X_xli

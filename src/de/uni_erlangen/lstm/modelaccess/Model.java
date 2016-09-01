@@ -222,10 +222,8 @@ public class Model implements Runnable {
 			}
 		}
 
-		// We need to pull variables (S_h2 and acid-base) directly from the model if using DAE
-		if (dae) {
-			x = ode.getDimensions();
-		}
+		// Pull all variables directly from model
+		x = ode.getDimensions();
 		
 		finished = true;
 	}

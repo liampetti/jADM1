@@ -109,7 +109,7 @@ public class DigesterParameters {
 		K_S_c4=0.2;				// 35. Half saturation value valerate and butyrate
 		k_m_pro=13.0;			// 36. Monod maximum specific uptake rate propionate
 		K_S_pro=0.1;			// 37. Half saturation value propionate
-		k_m_ac=8.0;				// 38. Monod maximum specific uptake rate acetate
+		k_m_ac=4.7;//8.0;		// 38. Monod maximum specific uptake rate acetate *** MODIFIED ***
 		K_S_ac=0.15;			// 39. Half saturation value acetate
 		k_m_h2=35.0;			// 40. Monod maximum specific uptake rate hydrogen
 		K_S_h2=7.0e-6;			// 41. Half saturation value hydrogen
@@ -147,6 +147,8 @@ public class DigesterParameters {
 		C_bu=0.025;				// 73. Carbon content of butyrate
 		f_pro_su=0.27;			// 74. Yield (catabolism only) of propionate on monosaccharides
 		C_pro=0.0268;			// 75. Carbon content of butyrate
+		f_ac_su=0.41;			// 76. Yield (catabolism only) of acetate on monosaccharides
+		C_ac=0.0313;			// 77. Carbon content of acetate
 		f_ac_su=0.41;			// 76. Yield (catabolism only) of acetate on monosaccharides
 		C_ac=0.0313;			// 77. Carbon content of acetate
 		C_bac=0.0313;			// 78. Carbon content of base acetate
@@ -195,13 +197,13 @@ public class DigesterParameters {
 		k_m_li=10.0;			// 109. Maximum specific uptake rate lipids
 		K_s_li=0.5;				// 110. Half saturation value lipids
 		k_dec_li=0.01;			// 111. Decay rate lipids
-		Y_xc=0.4;				// 112. Yield of biomass on composites
-		Y_ch=0.1;				// 113. Yield of biomass on carbohydrates
-		Y_pr=0.1;				// 114. Yield of biomass on proteins
-		Y_li=0.1;				// 115. Yield of biomass on lipids
+		Y_xc=0.00;				// 112. Yield of biomass on composites
+		Y_ch=0.02;				// 113. Yield of biomass on carbohydrates
+		Y_pr=0.02;				// 114. Yield of biomass on proteins
+		Y_li=0.02;				// 115. Yield of biomass on lipids
 		// Ammonia inhibition
 		S_nh3_lim=4.5e-3;		// 116. Mean free ammonia threshold concentration (kmole N/m3)
-		K_nh3=0.345;			// 117. Ammonia inhibition tuning parameter
+		K_nh3=1.0;				// 117. Ammonia inhibition tuning parameter
 		b_nh3=1.0;				// 118. Maximum value for ammonia inhibition
 		h_nh3=1.0;				// 119. Hill coefficient for ammonia inhibition function drop
 		// Gas Diffusivity {Cussler, E. L. (1997). Diffusion: Mass Transfer in Fluid Systems (2nd ed.). New York: Cambridge University Press. ISBN 0-521-45078-0.}

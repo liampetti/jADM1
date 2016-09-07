@@ -42,9 +42,9 @@ public class BSM2Defaults {
 		S_I = 0.033; // 11. 		(12) soluble inerts (kg COD/m3)[g COD/L]
 		// Particulates ---->
 		X_xc = 0.0;//0.31; // 12. 	(13) composites (kg COD/m3)[g COD/L] *** NOT USED : direct mapping from biomass decay ***
-		X_ch = 0.0;//0.028; // 13. 	(14) carbohydrates (kg COD/m3)[g COD/L]
-		X_pr = 0.0;//0.1; // 14. 	(15) proteins (kg COD/m3)[g COD/L]
-		X_li = 0.0;//0.029; // 15. 	(16) lipids (kg COD/m3)	[g COD/L]	
+		X_ch = 0.028; // 13. 		(14) carbohydrates (kg COD/m3)[g COD/L]
+		X_pr = 0.1; // 14. 			(15) proteins (kg COD/m3)[g COD/L]
+		X_li = 0.029; // 15. 		(16) lipids (kg COD/m3)	[g COD/L]	
 		X_su = 0.42; // 16. 		(17) sugar degraders (kg COD/m3)[g COD/L]
 		X_aa = 1.18; // 17. 		(18) amino acid degraders (kg COD/m3)[g COD/L]
 		X_fa = 0.24; // 18.  		(19) LCFA degraders (kg COD/m3)[g COD/L]
@@ -71,7 +71,7 @@ public class BSM2Defaults {
 		gas_vol = 0.0; // 38. 		(39) gas volume (m3/d)
 		ph = 0.0; // 39. 			(40) pH
 		// Modified ADM1 (Disintegration and Hydrolysis)
-		X_c = 0.31; 	  	// 40. 	(41) Composite degraders (kg COD/m3)[g COD/L] *** NOT USED : direct mapping from biomass decay ***
+		X_c = 0.0;//0.31; 	// 40.	(41) Composite degraders (kg COD/m3)[g COD/L] *** NOT USED : direct mapping from biomass decay ***
 		X_xch = 0.028; 		// 41. 	(42) Carbohydrate degraders (kg COD/m3)[g COD/L]
 		X_xpr = 0.1; 		// 42. 	(43) Protein degraders (kg COD/m3)[g COD/L]
 		X_xli = 0.029; 		// 43. 	(44) Lipid degraders (kg COD/m3)[g COD/L]

@@ -146,6 +146,16 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 			}
 		}
 		
+		// *** Modification: Fractionate any composite material instantly ***
+		/*
+		xtemp[11] = xtemp[11]+xtemp[12]*param[57]; // SI
+		xtemp[13] = xtemp[13]+xtemp[12]*param[59]; // Xch
+		xtemp[14] = xtemp[14]+xtemp[12]*param[61]; // Xpr
+		xtemp[15] = xtemp[15]+xtemp[12]*param[63]; // Xli
+		xtemp[23] = xtemp[23]+xtemp[12]*param[65]; // XI
+		xtemp[12] = 0.0;
+		*/
+		
 		// Adjustments for acid-base equations
 		factor = (1.0/(param[0]) - 1.0/(273.15+xtemp[36]))/(100.0*R);
 		K_w = Math.pow(10,-param[2])*Math.exp(55900.0*factor); // T adjustment for K_w 
@@ -329,6 +339,8 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		reac27 = param[115]*proc4-proc23;
 		// reac28 = (1.0-Y_xc)*f_xI_xc*proc1; *** Modified ADM1 (Disintegration and Hydrolysis) // *** Modified :direct mapping from biomass decay
 		
+		
+		
 		q_gas = param[97]*(P_gas-P_atm);
 		if (q_gas < 0)
 		   q_gas = 0.0;
@@ -391,8 +403,9 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		dx[33] = -xtemp[33]*q_gas/param[99]+procT9*param[98]/param[99]; 	// Sgas,ch4
 		dx[34] = -xtemp[34]*q_gas/param[99]+procT10*param[98]/param[99]; 	// Sgas,co2
 		
-		// Correction by factor of 64.0 due to COD basis of Sgas,ch4
-		xtemp[37] = (q_gas*xtemp[33])*R*(273.15+xtemp[36])/64.0; // Methane gas (m3/d)
+		// Correction by factor of 64.0 due to COD basis of Sgas,ch4  // Methane gas (m3/d)
+		//xtemp[37] = (q_gas*xtemp[33])*R*(273.15+xtemp[36])/64.0; // Calculate methane flow from concentration in gas phase
+		xtemp[37] = q_gas*(p_gas_ch4/P_gas); // Calculate methane flow from partial pressures
 
 		xtemp[38] = q_gas;	// Gas production (m3/d)
 				

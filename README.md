@@ -1,9 +1,9 @@
 #jADM1
 A Java implementation of the Anaerobic Digestion Model No 1 (ADM1).
 
-Original based on the Matlab code produced for the Benchmark Simulation Model No 2 (BSM2) produced by the International Water Association (IWA) Task Group on Benchmarking of Control Strategies for Wastewater Treatment Plants. The original ADM1 was developed by the IWA Task Group for Mathematical Modelling of Anaerobic Digestion Processes.
+Based on the Matlab code produced for the Benchmark Simulation Model No 2 (BSM2) produced by the International Water Association (IWA) Task Group on Benchmarking of Control Strategies for Wastewater Treatment Plants. The original ADM1 was developed by the IWA Task Group for Mathematical Modelling of Anaerobic Digestion Processes.
 
-Modifications have been made to the hydrolysis structures and composite material has been removed as a state variable. 
+Modifications have been made to the hydrolysis structures and composite material has been removed as a state variable. The original model that can be validated using the BSM2 Matlab code is 'jADM1_BSM'.
 
 This work has been created at:
 

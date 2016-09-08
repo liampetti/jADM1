@@ -110,7 +110,7 @@ public class Main {
 		// No command line arguments, run a default setup
 		start = 0.0;
 		finish = 200.0;
-		modOut = false;
+		modOut = true;
 		step = 0.1;	
 		dae = true;
 		

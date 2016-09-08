@@ -339,8 +339,6 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		reac27 = param[115]*proc4-proc23;
 		// reac28 = (1.0-Y_xc)*f_xI_xc*proc1; *** Modified ADM1 (Disintegration and Hydrolysis) // *** Modified :direct mapping from biomass decay
 		
-		
-		
 		q_gas = param[97]*(P_gas-P_atm);
 		if (q_gas < 0)
 		   q_gas = 0.0;

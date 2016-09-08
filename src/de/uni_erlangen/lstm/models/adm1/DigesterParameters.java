@@ -95,10 +95,14 @@ public class DigesterParameters {
 		K_Ih2_c4=1.0e-5;		// 21. 50% inhibitory concentration valerate and butyrate
 		K_Ih2_pro=3.5e-6;		// 22. 50% inhibitory concentration propionate
 		K_I_nh3=0.0018;			// 23. Half saturation value ammonia
+		
+		// NOT USED --->
 		k_dis=0.5;				// 24. First order disintegration rate
 		k_hyd_ch=10.0;			// 25. First order hydrolysis parameter carbohydrates
 		k_hyd_pr=10.0;			// 26. First order hydrolysis parameter proteins
 		k_hyd_li=10.0;			// 27. First order hydrolysis parameter lipids
+		// <--- NOT USED
+		
 		k_m_su=30.0;			// 28. Monod maximum specific uptake rate monosaccharides
 		K_S_su=0.5;				// 29. Half saturation value monosaccharides
 		k_m_aa=50.0;			// 30. Monod maximum specific uptake rate amino acids
@@ -188,6 +192,7 @@ public class DigesterParameters {
 		K_s_xc=0.3;				// 101. Half saturation value composite
 		k_dec_xc=0.01;			// 102. Decay rate composite
 		// <--- NOT USED
+		
 		k_m_ch=10.0;			// 103. Maximum specific uptake rate carbohydrates
 		K_s_ch=0.5;				// 104. Half saturation value carbohydrates
 		k_dec_ch=0.01;			// 105. Decay rate carbohydrates
@@ -197,10 +202,13 @@ public class DigesterParameters {
 		k_m_li=10.0;			// 109. Maximum specific uptake rate lipids
 		K_s_li=0.5;				// 110. Half saturation value lipids
 		k_dec_li=0.01;			// 111. Decay rate lipids
-		Y_xc=0.00;				// 112. Yield of biomass on composites
-		Y_ch=0.02;				// 113. Yield of biomass on carbohydrates
-		Y_pr=0.02;				// 114. Yield of biomass on proteins
-		Y_li=0.02;				// 115. Yield of biomass on lipids
+		// NOT USED --->
+		Y_xc=0.4;				// 112. Yield of biomass on composites
+		// <--- NOT USED
+		Y_ch=0.1;				// 113. Yield of biomass on carbohydrates
+		Y_pr=0.1;				// 114. Yield of biomass on proteins
+		Y_li=0.1;				// 115. Yield of biomass on lipids
+		
 		// Ammonia inhibition
 		S_nh3_lim=4.5e-3;		// 116. Mean free ammonia threshold concentration (kmole N/m3)
 		K_nh3=1.0;				// 117. Ammonia inhibition tuning parameter

@@ -76,7 +76,7 @@ CSV files contain the variable values in a ';' separated string. The influent fi
 
 11) soluble inerts (kg COD/m3)
 
-12) composites (kg COD/m3)
+>12) composites (kg COD/m3) *** Variable is not used ***
 
 13) carbohydrates (kg COD/m3)
 
@@ -101,54 +101,57 @@ CSV files contain the variable values in a ';' separated string. The influent fi
 23) particulate inerts (kg COD/m3)
 
 
->24) cations (metallic ions, strong base) (kmole/m3)
+24) cations (metallic ions, strong base) (kmole/m3)
 
->25) anions (metallic ions, strong acid) (kmole/m3)
+25) anions (metallic ions, strong acid) (kmole/m3)
 
->26) is actually Sva- = valerate (kg COD/m3)
+26) is actually Sva- = valerate (kg COD/m3)
 
->27) is actually Sbu- = butyrate (kg COD/m3)
+27) is actually Sbu- = butyrate (kg COD/m3)
 
->28) is actually Spro- = propionate (kg COD/m3)
+28) is actually Spro- = propionate (kg COD/m3)
 
->29) is actually Sac- = acetate (kg COD/m3)
+29) is actually Sac- = acetate (kg COD/m3)
 
->30) bicarbonate (kmole C/m3)
+30) bicarbonate (kmole C/m3)
 
->31) ammonia (kmole N/m3)
+31) ammonia (kmole N/m3)
 
->32) hydrogen concentration in gas phase (kg COD/m3)
+32) hydrogen concentration in gas phase (kg COD/m3)
 
->33) methane concentration in gas phase (kg COD/m3)
+33) methane concentration in gas phase (kg COD/m3)
 
->34) carbon dioxide concentration in gas phase (kmole C/m3)
+34) carbon dioxide concentration in gas phase (kmole C/m3)
 
+35) flow rate (m3/d) - Set by influent
 
-24/35) flow rate (m3/d) - Set by influent
+36) temperature (deg C) - Set by digester
 
-25/36) temperature (deg C) - Set by digester
+37) methane volume (m3/d)
 
->37) methane volume (m3/d)
+38) gas volume (m3/d)
 
->38) gas volume (m3/d)
+39) pH
 
->39) pH
+40) carbon dioxide gas (kg COD/m3)[g COD/L]
 
->40) Particulate compound concentration composite (kg COD/m3)
+41) ammonium (kmole N/m3)
 
->41) Hydrolytic (disintegration) biomass concentration carbohydrate (kg COD/m3)
+>42) Particulate compound concentration composite (kg COD/m3) *** Variable is not used ***
 
->42) Hydrolytic (disintegration) biomass concentration protein (kg COD/m3)
+43) Hydrolytic (disintegration) biomass concentration carbohydrate (kg COD/m3)
 
->43) Hydrolytic (disintegration) biomass concentration lipid (kg COD/m3)
+44) Hydrolytic (disintegration) biomass concentration protein (kg COD/m3)
 
->44) Inorganic phosphorus (ADM1) (kmole P/m3)
+45) Hydrolytic (disintegration) biomass concentration lipid (kg COD/m3)
 
->45) Polyhydroxyalkanoates (kg COD/m3)
+>46) Inorganic phosphorus (ADM1) (kmole P/m3) *** Not yet implemented ***
 
->46) Polyphosphates (kg COD/m3)
+>47) Polyhydroxyalkanoates (kg COD/m3) *** Not yet implemented ***
 
->47) Phosphorus accumulating organisms (kg COD/m3)
+>48) Polyphosphates (kg COD/m3) *** Not yet implemented ***
+
+>49) Phosphorus accumulating organisms (kg COD/m3) *** Not yet implemented ***
 
 
 #Dependencies

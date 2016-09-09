@@ -184,8 +184,7 @@ public class DigesterParameters {
 		 * „Modified ADM1 disintegration/hydrolysis structures for modeling batch thermophilic anaerobic digestion of thermally pretreated waste activated sludge“.
 		 * Water Research 43, Nr. 14 (August 2009): 3479–92. doi:10.1016/j.watres.2009.05.023.
 		 * 
-		 * Table 2
-		 * 
+		 * Default Values
 		 */
 		// NOT USED --->
 		k_m_xc=1.75; 			// 100. Maximum specific uptake rate composite

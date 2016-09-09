@@ -146,16 +146,6 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 			}
 		}
 		
-		// *** Modification: Fractionate any composite material instantly ***
-		/*
-		xtemp[11] = xtemp[11]+xtemp[12]*param[57]; // SI
-		xtemp[13] = xtemp[13]+xtemp[12]*param[59]; // Xch
-		xtemp[14] = xtemp[14]+xtemp[12]*param[61]; // Xpr
-		xtemp[15] = xtemp[15]+xtemp[12]*param[63]; // Xli
-		xtemp[23] = xtemp[23]+xtemp[12]*param[65]; // XI
-		xtemp[12] = 0.0;
-		*/
-		
 		// Adjustments for acid-base equations
 		factor = (1.0/(param[0]) - 1.0/(273.15+xtemp[36]))/(100.0*R);
 		K_w = Math.pow(10,-param[2])*Math.exp(55900.0*factor); // T adjustment for K_w 

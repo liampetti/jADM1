@@ -112,7 +112,7 @@ public class Main {
 		// No command line arguments, run a default setup
 		start = 0.0;
 		finish = 200.0;
-		modOut = true;
+		modOut = false;
 		step = 0.1;	
 		dae = true;
 		
@@ -121,6 +121,10 @@ public class Main {
 		model = new Model(start, finish, parameters, initial, influent, modOut);	
 		model.setDAE(dae);		
 		model.addEvents(events);
+		
+		if (modOut) {
+			writer.Clear("cont_model_output.csv");
+		}
 		
 		new Thread(model).start();
 		
@@ -155,6 +159,7 @@ public class Main {
 	private void runDynamic() {
 		double stime = System.currentTimeMillis();
 		CSVWriter writer = new CSVWriter();
+		writer.Clear("dynamic_output.csv");
 		events = new ArrayList<DiscreteEvent>();
 		// Setup model outputs and parameters (default is BSM2)
 		BSM2Defaults defaults = new BSM2Defaults();

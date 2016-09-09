@@ -48,7 +48,7 @@ public class StateVariables {
 	private double X_xc, X_xch, X_xpr, X_xli, X_c, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I, X_PHA, X_PP, X_PAO = 0.0;
 	private double S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4, S_gas_co2 = 0.0;
 	private double Q_D, T_D, gas_ch4, gas_vol, ph = 0.0;
-	private double temp1, temp2, temp3 = 0.0;
+	private double S_co2, S_nh4 = 0.0;
 	
 	/**
 	 * Read the outputs from a given CSV file
@@ -84,9 +84,9 @@ public class StateVariables {
 		return new double[] { S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4,
 			S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
 			X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
-			S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph,
-			X_c, X_xch, X_xpr, X_xli, S_IP, X_PHA, X_PP, X_PAO, 
-			temp1, temp2, temp3};
+			S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph, S_co2, S_nh4,
+			X_c, X_xch, X_xpr, X_xli, S_IP, X_PHA, X_PP, X_PAO 
+			};
 	}
 	
 	/**
@@ -135,8 +135,8 @@ public class StateVariables {
 			gas_ch4=0.0;
 			gas_vol=0.0;
 			ph=0.0;
-			temp1=0.0;
-			temp2=0.0;
+			S_co2=0.0;
+			S_nh4=0.0;
 		} else {
 			S_hva=x[26];
 			S_hbu=x[27];
@@ -152,17 +152,16 @@ public class StateVariables {
 			gas_ch4=x[37];
 			gas_vol=x[38];
 			ph=x[39];
-			X_c=x[40];
-			X_xch=x[41];
-			X_xpr=x[42];
-			X_xli=x[43];
-			S_IP=x[44];
-			X_PHA=x[45];
-			X_PP=x[46];
-			X_PAO=x[47];
-			temp1=x[48];
-			temp2=x[49];
-			temp3=x[50];
+			S_co2=x[40];
+			S_nh4=x[41];
+			X_c=x[42];
+			X_xch=x[43];
+			X_xpr=x[44];
+			X_xli=x[45];
+			S_IP=x[46];
+			X_PHA=x[47];
+			X_PP=x[48];
+			X_PAO=x[49];
 		}
 	}
 	
@@ -553,27 +552,19 @@ public class StateVariables {
 		this.ph = ph;
 	}
 
-	public double getTemp1() {
-		return temp1;
+	public double getS_co2() {
+		return S_co2;
 	}
 
-	public void setTemp1(double temp1) {
-		this.temp1 = temp1;
+	public void setS_co2(double s_co2) {
+		S_co2 = s_co2;
 	}
 
-	public double getTemp2() {
-		return temp2;
+	public double getS_nh4() {
+		return S_nh4;
 	}
 
-	public void setTemp2(double temp2) {
-		this.temp2 = temp2;
-	}
-
-	public double getTemp3() {
-		return temp3;
-	}
-
-	public void setTemp3(double temp3) {
-		this.temp3 = temp3;
+	public void setS_nh4(double s_nh4) {
+		S_nh4 = s_nh4;
 	}
 }

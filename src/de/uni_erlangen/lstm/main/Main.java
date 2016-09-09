@@ -97,7 +97,9 @@ public class Main {
 		}
 	}
 	
-	private void runSteady() {		
+	private void runSteady() {	
+		CSVWriter writer = new CSVWriter();
+		writer.Clear("cont_model_output.csv");
 		stime = System.currentTimeMillis();
 		events = new ArrayList<DiscreteEvent>();
 		// Setup model outputs and parameters (default is BSM2)
@@ -146,8 +148,7 @@ public class Main {
 					";\t Effluent; " + x[i] + "\n";
 	 	}
 		System.out.println(output);
-		CSVWriter writer = new CSVWriter();
-		// Append
+		
 		writer.WriteString("steady_result.csv", output, true);
 	}
 	
@@ -156,8 +157,9 @@ public class Main {
 		CSVWriter writer = new CSVWriter();
 		events = new ArrayList<DiscreteEvent>();
 		// Setup model outputs and parameters (default is BSM2)
+		BSM2Defaults defaults = new BSM2Defaults();
 		initial = new StateVariables();
-		initial.readVar("dynamic_init.csv");
+		initial.setVar(defaults.DigesterInit());
 		influent = new StateVariables();
 		dynamicIn = new CSVReader("digesterin.csv", ",");
 		parameters = new DigesterParameters();
@@ -190,8 +192,15 @@ public class Main {
 			
 			model.setTime(start, start+step);
 			model.run();
-			// Append
-			writer.WriteArray("dynamic_output.csv", model.getX(), true);
+			
+			// Add time to the beginning of the array and save to csv
+			double[] timemodel = new double[model.getX().length+1];
+			timemodel[0] = start;
+			for (int i=1;i<timemodel.length;i++) {
+				timemodel[i] = model.getX()[i-1];
+			}
+			writer.WriteArray("dynamic_output.csv", timemodel, true);
+			
 			start = start+step;
 			if (t%(Math.round(finish/100)) == 0) {
 				System.out.println("Progress = " + String.format("%.2f",(start/finish)*100) + "%");

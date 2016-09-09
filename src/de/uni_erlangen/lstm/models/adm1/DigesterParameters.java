@@ -113,7 +113,7 @@ public class DigesterParameters {
 		K_S_c4=0.2;				// 35. Half saturation value valerate and butyrate
 		k_m_pro=13.0;			// 36. Monod maximum specific uptake rate propionate
 		K_S_pro=0.1;			// 37. Half saturation value propionate
-		k_m_ac=4.7;//8.0;		// 38. Monod maximum specific uptake rate acetate *** MODIFIED ***
+		k_m_ac=8.0;				// 38. Monod maximum specific uptake rate acetate
 		K_S_ac=0.15;			// 39. Half saturation value acetate
 		k_m_h2=35.0;			// 40. Monod maximum specific uptake rate hydrogen
 		K_S_h2=7.0e-6;			// 41. Half saturation value hydrogen
@@ -202,9 +202,11 @@ public class DigesterParameters {
 		k_m_li=10.0;			// 109. Maximum specific uptake rate lipids
 		K_s_li=0.5;				// 110. Half saturation value lipids
 		k_dec_li=0.01;			// 111. Decay rate lipids
+		
 		// NOT USED --->
 		Y_xc=0.4;				// 112. Yield of biomass on composites
 		// <--- NOT USED
+		
 		Y_ch=0.1;				// 113. Yield of biomass on carbohydrates
 		Y_pr=0.1;				// 114. Yield of biomass on proteins
 		Y_li=0.1;				// 115. Yield of biomass on lipids

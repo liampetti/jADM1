@@ -6,4 +6,5 @@
 .project
 steady_result.csv
 cont_model_output.csv
-
+digesterin.csv
+dynamic_output.csv

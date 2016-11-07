@@ -66,6 +66,8 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 	private double[] xtemp;
 	private double factor, R, P_atm;
 	private double fix_pH;
+	private double last_T;
+	private double tot_gas;
 	
 	/** 
 	 * Initiates the model using the defined parameters and pre-calculates the stoichiometry parameter values for use in the water phase
@@ -92,6 +94,8 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		eps = 0.000001; // Small constant in case of poor choice of initial conditions for proc8,9
 		P_atm = 1.013;	// bar
 		R = 0.083145;	// universal gas constant dm3*bar/(mol*K) = 8.3145 J/(mol*K)
+		last_T = 0.0;  // last time step
+		tot_gas = 0.0; // total gas volume produced
 
 		// Stoichiometry for use in water phase equations
 		// stoich1 = -C_xc+f_sI_xc*C_sI+f_ch_xc*C_ch+f_pr_xc*C_pr+f_li_xc*C_li+f_xI_xc*C_xI
@@ -183,7 +187,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		
 		// Adjustments for gas pressure
 		p_gas_h2 = xtemp[32]*R*(273.15+xtemp[36])/16.0;
-		p_gas_ch4 = xtemp[33]*R*(273.15+xtemp[36])/64.0;
+		p_gas_ch4 = xtemp[33]*R*(273.15+xtemp[36])/64.0; // Correction by factor of 64.0 due to COD basis of Sgas,ch4  // Methane gas (m3/d)
 		p_gas_co2 = xtemp[34]*R*(273.15+xtemp[36]);
 		P_gas = p_gas_h2 + p_gas_ch4 + p_gas_co2 + p_gas_h2o;
 				
@@ -384,11 +388,10 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		dx[33] = -xtemp[33]*q_gas/param[99]+procT9*param[98]/param[99]; 	// Sgas,ch4
 		dx[34] = -xtemp[34]*q_gas/param[99]+procT10*param[98]/param[99]; 	// Sgas,co2
 		
-		// Correction by factor of 64.0 due to COD basis of Sgas,ch4  // Methane gas (m3/d)
-		//xtemp[37] = (q_gas*xtemp[33])*R*(273.15+xtemp[36])/64.0; // Calculate methane flow from concentration in gas phase
-		xtemp[37] = q_gas*(p_gas_ch4/P_gas); // Calculate methane flow from partial pressures
+		tot_gas = tot_gas+q_gas*(t-last_T);
+		xtemp[37] = tot_gas*(p_gas_ch4/P_gas); // Calculate total methane produced from partial pressures (m3)
 
-		xtemp[38] = q_gas;	// Gas production (m3/d)
+		xtemp[38] = tot_gas;	// Total gas production (m3)
 				
 		xtemp[39] = -Math.log10(S_H_ion); // pH
 		
@@ -427,6 +430,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		//1.0/V_liq*(u[24]*(u[29]-x[45])) + reac28;
 		dx[49] = 0; // X_PAO	
 		*/	
+		last_T = t;
 	}
 	
 	public void runDAE() {			

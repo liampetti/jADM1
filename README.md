@@ -127,9 +127,9 @@ CSV files contain the variable values in a ';' separated string. The influent fi
 
 36) temperature (deg C) - Set by digester
 
-37) methane volume (m3/d)
+37) total methane volume (m3)
 
-38) gas volume (m3/d)
+38) total gas volume (m3)
 
 39) pH
 

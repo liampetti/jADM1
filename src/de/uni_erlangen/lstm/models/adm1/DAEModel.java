@@ -387,8 +387,6 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		// Gas flows
 		xtemp[37] = q_gas*(p_gas_ch4/P_gas);
 		xtemp[38] = q_gas;
-		
-		//System.out.println("t: "+t+", q_gas: "+q_gas+", gas: "+xtemp[38]+", dx: "+dx[38]);
 				
 		xtemp[39] = -Math.log10(S_H_ion); // pH
 		

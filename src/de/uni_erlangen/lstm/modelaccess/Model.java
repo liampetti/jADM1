@@ -186,7 +186,7 @@ public class Model implements Runnable {
 							timemodel[i] = ode.getDimensions()[i-1];
 						}
 						// Append
-			        	writer.WriteArray("cont_model_output.csv", timemodel, true);
+			        	writer.WriteArray("adm1_cont_output.csv", timemodel, true);
 			        	prevT = t;
 			        }
 			    }

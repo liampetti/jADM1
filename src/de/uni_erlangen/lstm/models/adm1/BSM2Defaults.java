@@ -67,8 +67,8 @@ public class BSM2Defaults {
 		S_gas_co2 = 0.014; 	// 34. 		(35) carbon dioxide concentration in gas phase (kmole C/m3)[mol C/L]
 		Q_D = 0.0; 			// 35. 		(36) flow rate (m3/d) - Set by influent
 		T_D = 35.0; 		// 36. 		(37) digester temperature (deg C)
-		gas_ch4 = 0.0; 		// 37. 		(38) total methane volume (m3)
-		gas_vol = 0.0; 		// 38. 		(39) total gas volume (m3)
+		gas_ch4 = 0.0; 		// 37. 		(38) flow methane (m3/d)
+		gas_vol = 0.0; 		// 38. 		(39) flow biogas (m3/d)
 		ph = 0.0; 			// 39. 		(40) pH
 		S_co2 = 0.0; 		// 40. 		(41) carbon dioxide gas (kg COD/m3)[g COD/L]
 		S_nh4 = 0.0; 		// 41. 		(42) ammonium (kmole N/m3)
@@ -138,8 +138,8 @@ public class BSM2Defaults {
 		S_gas_co2 = 0.0; // 34. carbon dioxide concentration in gas phase (kmole C/m3)		
 		Q_D = 170.0; // 35. flow rate (m3/d)
 		T_D = 0.0; // 36. temperature (deg C) - SET BY DIGESTER
-		gas_ch4 = 0.0; // 37. total methane volume (m3)
-		gas_vol = 0.0; // 38. total gas volume (m3)
+		gas_ch4 = 0.0; // 37. flow methane (m3/d)
+		gas_vol = 0.0; // 38. flow biogas (m3/d)
 		ph = 0.0; // 39. pH
 		S_co2 = 0.0; // 40. carbon dioxide gas (kg COD/m3)[g COD/L]
 		S_nh4 = 0.0; // 41. ammonium (kmole N/m3)

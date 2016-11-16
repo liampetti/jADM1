@@ -185,7 +185,7 @@ public class Main {
 		int t = 0;
 		
 		while (!dynamicIn.finished()) {
-			String[] inString = dynamicIn.getStrings();		
+			String[] inString = dynamicIn.getNextString();		
 			if (inString.length > 0) {
 				double[] in = new double[inString.length];
 				for (int i=0;i<in.length;i++) {

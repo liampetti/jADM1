@@ -57,7 +57,7 @@ public class StateVariables {
 	 */
 	public void readVar(String filename) {
 		CSVReader reader = new CSVReader(filename, ";");
-		String[] outputs = reader.getStrings();
+		String[] outputs = reader.getLastStrings();
 		double[] x = new double[outputs.length-1];
 		// Skip first entry (time)
 		for (int i=1;i<x.length;i++) {

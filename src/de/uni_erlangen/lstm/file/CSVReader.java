@@ -21,7 +21,10 @@
 
 package de.uni_erlangen.lstm.file;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.logging.Logger;
@@ -38,6 +41,7 @@ public class CSVReader {
 	// File data
 	private String filename;
 	private String splitter;
+	private BufferedReader br = null;
 	
 	private boolean finished = false;
 	
@@ -45,12 +49,21 @@ public class CSVReader {
 	public CSVReader() {
 		filename = "input.csv";
 		splitter = ";";
-		
+		initBuffer();
 	}
 	
 	public CSVReader(String filename, String splitter) {
 		this.filename = filename;
 		this.splitter = splitter;
+		initBuffer();
+	}
+	
+	public void initBuffer() {
+		try {
+			br = new BufferedReader(new FileReader(filename));
+		} catch (FileNotFoundException e) {
+			LOGGER.severe(e.toString());
+		}
 	}
 	
 	public boolean finished() {
@@ -62,7 +75,7 @@ public class CSVReader {
 	 * 
 	 * @return A string array of the last line
 	 */	
-	public String[] getStrings() {
+	public String[] getLastStrings() {
 		File file = new File(filename);
 	    RandomAccessFile fileHandler = null;
 	    try {
@@ -103,5 +116,29 @@ public class CSVReader {
 	            }
 	    }
 	}
+	
+	/**
+	 * Gets the next line from the given CSV file
+	 * 
+	 * @return A string array of from the current line, starting at the beginning
+	 */
+	public String[] getNextString() {
+		String[] currentList = new String[0];
+		String line = "";
+		
+		// Load our input list from the CSV file (reload)
+		try { 
+			if ((line = br.readLine()) != null) {	 
+				currentList = line.split(splitter); 
+			} else {
+				finished = true;
+				br.close();
+			}
+		} catch (IOException e) {
+			LOGGER.severe(e.toString());
+		}
+		
+		return currentList;
+}
 
 }

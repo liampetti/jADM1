@@ -170,7 +170,7 @@ public class DigesterParameters {
 		Y_h2=0.06;				// 90. Yield of biomass on hydrogen
 		f_h2_su=0.19;			// 91. Yield (catabolism only) of hydrogen on monosaccharides
 		f_h2_aa=0.06;			// 92. Yield (catabolism only) of hydrogen on amino acids
-		N_xc=0.0026857143;		// 93. Nitrogen component of composite material
+		N_xc=0.0;				// 93. Nitrogen component of composite material *** NOT USED ***
 		N_I=0.0042857143;		// 94. Nitrogen component of inorganic material
 		N_aa=0.007;				// 95. Nitrogen component of amino acids
 		N_bac=0.0057142857;		// 96. Nitrogen component of base acetate

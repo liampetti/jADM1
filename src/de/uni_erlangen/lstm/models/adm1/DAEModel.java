@@ -47,7 +47,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 	private boolean sh2DAE;
 
 	private double eps, phi, S_H_ion;
-	private double proc1, proc2, proc3, proc4, proc5, proc6, proc7, proc8, proc9, proc10, proc11, proc12, proc13;
+	private double proc2, proc3, proc4, proc5, proc6, proc7, proc8, proc9, proc10, proc11, proc12, proc13;
 	private double proc14, proc15, proc16, proc17, proc18, proc19;
 	private double proc21, proc22, proc23;
 	private double procT8, procT9, procT10;
@@ -55,7 +55,7 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 	private double reac1, reac2, reac3, reac4, reac5, reac6, reac7, reac8, reac9, reac10, reac11, reac12;
 	private double reac14, reac15, reac16, reac17, reac18, reac19, reac20, reac21, reac22, reac23, reac24, reac25;
 	private double reac26, reac27;
-	private double stoich1, stoich2, stoich3, stoich4, stoich5, stoich6, stoich7, stoich8, stoich9, stoich10, stoich11, stoich12, stoich13;
+	private double stoich2, stoich3, stoich4, stoich5, stoich6, stoich7, stoich8, stoich9, stoich10, stoich11, stoich12, stoich13;
 	private double p_gas_h2o, P_gas, p_gas_h2, p_gas_ch4, p_gas_co2, q_gas;
 	private double pHLim_aa, pHLim_ac, pHLim_h2, n_aa, n_ac, n_h2;
 	private double K_w, K_a_va, K_a_bu, K_a_pro, K_a_ac, K_a_co2, K_a_IN, K_H_co2, K_H_ch4, K_H_h2;
@@ -94,8 +94,8 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		R = 0.083145;	// universal gas constant dm3*bar/(mol*K) = 8.3145 J/(mol*K)
 
 		// Stoichiometry for use in water phase equations
-		// stoich1 = -C_xc+f_sI_xc*C_sI+f_ch_xc*C_ch+f_pr_xc*C_pr+f_li_xc*C_li+f_xI_xc*C_xI
-		stoich1 = -param[56]+param[57]*param[58]+param[59]*param[60]+param[61]*param[62]+param[63]*param[64]+param[65]*param[66];
+		// stoich1 = -C_xc+f_sI_xc*C_sI+f_ch_xc*C_ch+f_pr_xc*C_pr+f_li_xc*C_li+f_xI_xc*C_xI *** NOT USED ***
+		//stoich1 = -param[56]+param[57]*param[58]+param[59]*param[60]+param[61]*param[62]+param[63]*param[64]+param[65]*param[66];
 		// stoich2 = -C_ch+C_su
 		stoich2 = -param[60]+param[67];
 		// stoich3 = -C_pr+C_aa
@@ -278,9 +278,9 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		reac8 = (1.0-param[71])*param[91]*proc5+(1.0-param[79])*param[92]*proc6+(1.0-param[85])*0.3*proc7+(1.0-param[86])*0.15*proc8+(1.0-param[86])*0.2*proc9+(1.0-param[87])*0.43*proc10-proc12-procT8;
 		// reac9 = (1.0-Y_ac)*proc11+(1.0-Y_h2)*proc12-procT9;
 		reac9 = (1.0-param[88])*proc11+(1.0-param[90])*proc12-procT9;		
-		reac10 = -stoich1*proc1-stoich2*proc2-stoich3*proc3-stoich4*proc4-stoich5*proc5-stoich6*proc6-stoich7*proc7-stoich8*proc8-stoich9*proc9-stoich10*proc10-stoich11*proc11-stoich12*proc12-stoich13*proc13-stoich13*proc14-stoich13*proc15-stoich13*proc16-stoich13*proc17-stoich13*proc18-stoich13*proc19-procT10;
-		// reac11 = (N_xc-f_xI_xc*N_I-f_sI_xc*N_I-f_pr_xc*N_aa)*proc1-Y_su*N_bac*proc5+(N_aa-Y_aa*N_bac)*proc6-Y_fa*N_bac*proc7-Y_c4*N_bac*proc8-Y_c4*N_bac*proc9-Y_pro*N_bac*proc10-Y_ac*N_bac*proc11-Y_h2*N_bac*proc12+(N_bac-N_xc)*(proc13+proc14+proc15+proc16+proc17+proc18+proc19);
-		reac11 = -(param[93]-param[65]*param[94]-param[57]*param[94]-param[61]*param[95])*proc1-param[71]*param[96]*proc5+(param[95]-param[79]*param[96])*proc6-param[85]*param[96]*proc7-param[86]*param[96]*proc8-param[86]*param[96]*proc9-param[87]*param[96]*proc10-param[88]*param[96]*proc11-param[90]*param[96]*proc12+(param[96]-param[93])*(proc13+proc14+proc15+proc16+proc17+proc18+proc19);
+		reac10 = -stoich2*proc2-stoich3*proc3-stoich4*proc4-stoich5*proc5-stoich6*proc6-stoich7*proc7-stoich8*proc8-stoich9*proc9-stoich10*proc10-stoich11*proc11-stoich12*proc12-stoich13*proc13-stoich13*proc14-stoich13*proc15-stoich13*proc16-stoich13*proc17-stoich13*proc18-stoich13*proc19-procT10;
+		// reac11 = -Y_su*N_bac*proc5+(N_aa-Y_aa*N_bac)*proc6-Y_fa*N_bac*proc7-Y_c4*N_bac*proc8-Y_c4*N_bac*proc9-Y_pro*N_bac*proc10-Y_ac*N_bac*proc11-Y_h2*N_bac*proc12+(N_bac-N_xc)*(proc13+proc14+proc15+proc16+proc17+proc18+proc19);
+		reac11 = -param[71]*param[96]*proc5+(param[95]-param[79]*param[96])*proc6-param[85]*param[96]*proc7-param[86]*param[96]*proc8-param[86]*param[96]*proc9-param[87]*param[96]*proc10-param[88]*param[96]*proc11-param[90]*param[96]*proc12+(param[96]-param[93])*(proc13+proc14+proc15+proc16+proc17+proc18+proc19);
 		// reac12 = f_sI_xc*proc1; * BSM2 *
 		//reac12 = param[57]*proc1;
 		// reac12 = (1.0-Y_xc)*f_sI_xc*proc1; *** Modified ADM1 (Disintegration and Hydrolysis) ***

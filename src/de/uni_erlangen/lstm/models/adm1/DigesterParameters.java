@@ -54,7 +54,7 @@ public class DigesterParameters {
 	private double k_dec_Xsu, k_dec_Xaa, k_dec_Xfa, k_dec_Xc4, k_dec_Xpro, k_dec_Xac, k_dec_Xh2;
 	private double T_base, T_op, pK_w_base, pK_a_va_base, pK_a_bu_base, pK_a_pro_base, pK_a_ac_base, pK_a_co2_base, pK_a_IN_base;
 	private double k_A_Bva, k_A_Bbu, k_A_Bpro, k_A_Bac, k_A_Bco2, k_A_BIN;
-	private double k_P, kLa, K_H_h2o_base, K_H_co2_base, K_H_ch4_base, K_H_h2_base;
+	private double k_P, kLco2, K_H_h2o_base, K_H_co2_base, K_H_ch4_base, K_H_h2_base;
 	// Modified ADM1 parameters (Disintegration and Hydrolysis)
 	private double k_m_xc, K_s_xc, k_dec_xc, k_m_ch, K_s_ch, k_dec_ch, k_m_pr, K_s_pr, k_dec_pr, k_m_li, K_s_li, k_dec_li, Y_xc, Y_ch, Y_pr, Y_li;
 	// Modified ADM1 Hill function for ammonia inhibiton
@@ -130,7 +130,7 @@ public class DigesterParameters {
 		k_A_Bac=1.0e10;			// 52. Acid base kinetic parameter acetate
 		k_A_Bco2=1.0e10;		// 53. Acid base kinetic parameter carbon dioxide
 		k_A_BIN=1.0e10;			// 54. Acid base kinetic parameter inorganic nitrogen
-		kLa=200.0;				// 55. Gas-liquid transfer coefficient
+		kLco2=200.0;			// 55. Gas-liquid transfer coefficient carbon dioxide gas
 		C_xc=0.02786;			// 56. Carbon content of composite material
 		f_sI_xc=0.1;			// 57. Yield (catabolism only) of soluble inerts on composite material
 		C_sI=0.03;				// 58. Carbon content of soluble inerts
@@ -216,9 +216,9 @@ public class DigesterParameters {
 		b_nh3=1.0;				// 118. Maximum value for ammonia inhibition
 		h_nh3=1.0;				// 119. Hill coefficient for ammonia inhibition function drop
 		// Gas Diffusivity {Cussler, E. L. (1997). Diffusion: Mass Transfer in Fluid Systems (2nd ed.). New York: Cambridge University Press. ISBN 0-521-45078-0.}
-		D_h2=4.5e-9;			// 120. Diffusivity of hydrogen gas (m2/s)
-		D_ch4=1.49e-9;			// 121. Diffusivity of methane gas (m2/s)
-		D_co2=1.92e-9;			// 122. Diffusivity of carbon dioxide gas (m2/s)
+		D_h2=3.9e-4;			// 120. Diffusivity of hydrogen gas (m2/d)
+		D_ch4=1.3e-4;			// 121. Diffusivity of methane gas (m2/d)
+		D_co2=1.7e-4;			// 122. Diffusivity of carbon dioxide gas (m2/d)		
 	}
 	
 	/**
@@ -259,7 +259,7 @@ public class DigesterParameters {
 				pH_LL_h2, K_S_IN, K_Ih2_fa, K_Ih2_c4, K_Ih2_pro, K_I_nh3, k_dis, k_hyd_ch, k_hyd_pr, k_hyd_li,
 				k_m_su, K_S_su, k_m_aa, K_S_aa, k_m_fa, K_S_fa, k_m_c4, K_S_c4, k_m_pro, K_S_pro, k_m_ac, K_S_ac, 
 				k_m_h2, K_S_h2, k_dec_Xsu, k_dec_Xaa, k_dec_Xfa, k_dec_Xc4, k_dec_Xpro, k_dec_Xac, k_dec_Xh2,
-				k_A_Bva, k_A_Bbu, k_A_Bpro, k_A_Bac, k_A_Bco2, k_A_BIN, kLa, C_xc, f_sI_xc, C_sI, f_ch_xc, C_ch, 
+				k_A_Bva, k_A_Bbu, k_A_Bpro, k_A_Bac, k_A_Bco2, k_A_BIN, kLco2, C_xc, f_sI_xc, C_sI, f_ch_xc, C_ch, 
 				f_pr_xc, C_pr, f_li_xc, C_li, f_xI_xc, C_xI, C_su, C_aa, f_fa_li, C_fa, Y_su, f_bu_su, C_bu,
 				f_pro_su, C_pro, f_ac_su, C_ac, C_bac, Y_aa, f_va_aa, C_va, f_bu_aa, f_pro_aa, f_ac_aa, Y_fa,
 				Y_c4, Y_pro, Y_ac, C_ch4, Y_h2, f_h2_su, f_h2_aa, N_xc, N_I, N_aa, N_bac, k_P, V_liq, V_gas,
@@ -331,7 +331,7 @@ public class DigesterParameters {
 		k_A_Bac=param[52];
 		k_A_Bco2=param[53];
 		k_A_BIN=param[54];
-		kLa=param[55];
+		kLco2=param[55];
 		C_xc=param[56];
 		f_sI_xc=param[57];
 		C_sI=param[58];

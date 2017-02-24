@@ -44,6 +44,7 @@ import de.uni_erlangen.lstm.models.adm1.StateVariables;
 public class Model implements Runnable {
 	public final static Logger LOGGER = Logger.getLogger(Model.class.getName());
 	
+	private String output_file;
 	private double[] x;
 	private double[] u;
 	private double[] param;
@@ -67,7 +68,8 @@ public class Model implements Runnable {
 	 * @param outputs 		Custom outputs
 	 * @param contModel 	Build a continuous output model of the solution
 	 */
-	public Model(double start, double end, DigesterParameters parameters, StateVariables initial, StateVariables influent, boolean onlineRecord) {
+	public Model(double start, double end, DigesterParameters parameters, StateVariables initial, StateVariables influent, boolean onlineRecord, String output_file) {
+		this.output_file = output_file;
 		dae = true;
 		fix_pH = -1.0;
 		this.onlineRecord = onlineRecord;
@@ -186,7 +188,7 @@ public class Model implements Runnable {
 							timemodel[i] = ode.getDimensions()[i-1];
 						}
 						// Append
-			        	writer.WriteArray("adm1_cont_output.csv", timemodel, true);
+			        	writer.WriteArray(output_file, timemodel, true);
 			        	prevT = t;
 			        }
 			    }

@@ -59,6 +59,7 @@ public class Main {
 	private boolean steady;
 	private String[] args;
 	
+	private String output_file = "cont_model_output.csv";
 	private double stime;
 	private double start; // Model start time
 	private double finish; // Model end time
@@ -99,7 +100,7 @@ public class Main {
 	
 	private void runSteady() {	
 		CSVWriter writer = new CSVWriter();
-		writer.Clear("cont_model_output.csv");
+		writer.Clear(output_file);
 		stime = System.currentTimeMillis();
 		events = new ArrayList<DiscreteEvent>();
 		// Setup model outputs and parameters (default is BSM2)
@@ -118,7 +119,7 @@ public class Main {
 		
 		checkArgs();
 
-		model = new Model(start, finish, parameters, initial, influent, modOut);	
+		model = new Model(start, finish, parameters, initial, influent, modOut, output_file);	
 		model.setDAE(dae);		
 		model.addEvents(events);
 		
@@ -178,7 +179,7 @@ public class Main {
 		
 		checkArgs();
 
-		model = new Model(start, start+step, parameters, initial, influent, modOut);
+		model = new Model(start, start+step, parameters, initial, influent, modOut, output_file);
 		model.setDAE(dae);
 		model.addEvents(events);
 		

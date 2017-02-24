@@ -21,6 +21,7 @@
 
 package de.uni_erlangen.lstm.file;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -41,7 +42,12 @@ public class CSVWriter {
 	 */
 	public void WriteString(String filename, String output, boolean append) {				
 		try {
-			PrintStream fileStream = new PrintStream(new FileOutputStream(filename, append));
+			File f = new File(System.getProperty("user.dir")+filename);
+			if(!f.isFile()) {
+				f.getParentFile().mkdirs(); 
+				f.createNewFile();
+			}
+			PrintStream fileStream = new PrintStream(new FileOutputStream(System.getProperty("user.dir")+filename, append));
 			fileStream.println(output);
 			fileStream.close();
 		} catch (IOException e) {
@@ -52,9 +58,14 @@ public class CSVWriter {
 	/*
 	 * Print one line of data
 	 */
-	public void WriteArray(String filename, double[] outputs, boolean append) {				
+	public void WriteArray(String filename, double[] outputs, boolean append) {	
 		try {
-			PrintStream fileStream = new PrintStream(new FileOutputStream(filename, append));
+			File f = new File(System.getProperty("user.dir")+filename);
+			if(!f.isFile()) {
+				f.getParentFile().mkdirs(); 
+				f.createNewFile();
+			}
+			PrintStream fileStream = new PrintStream(new FileOutputStream(System.getProperty("user.dir")+filename, append));
 			String printer = "";
 			for (int i=0;i<outputs.length;i++) {
 				printer += outputs[i] + ";";
@@ -71,8 +82,13 @@ public class CSVWriter {
 	 */
 	public void WriteList(String filename, List<double[]> dataset, boolean append) {				
 		try {
+			File f = new File(System.getProperty("user.dir")+filename);
+			if(!f.isFile()) {
+				f.getParentFile().mkdirs(); 
+				f.createNewFile();
+			}
 			// Set the fileoutput stream to append mode
-			PrintStream fileStream = new PrintStream(new FileOutputStream(filename, append));			
+			PrintStream fileStream = new PrintStream(new FileOutputStream(System.getProperty("user.dir")+filename, append));			
 			String printer = "";
 					
 			for (double[] data : dataset) {
@@ -94,7 +110,7 @@ public class CSVWriter {
 	 */
 	public void Clear(String filename) {				
 		try {
-			PrintStream fileStream = new PrintStream(new FileOutputStream(filename, false));
+			PrintStream fileStream = new PrintStream(new FileOutputStream(System.getProperty("user.dir")+filename, false));
 			fileStream.print("");
 			fileStream.close();
 		} catch (IOException e) {

@@ -394,6 +394,9 @@ public class DAEModel implements FirstOrderDifferentialEquations {
 		xtemp[40] = xtemp[9]-xtemp[30]; // SCO2
 		// SNH4+ = SIN - SNH3
 		xtemp[41] = xtemp[10]-xtemp[31]; // SNH4+
+		
+		// Holder for total methane volume
+		xtemp[42] = 0.0;
 
 		//  *** Modified ADM1 (Disintegration and Hydrolysis) ***
 		//dx[42] = (x[35]/param[98])*(u[40]-xtemp[40])+reac28; // Xc // *** Modified :direct mapping from biomass decay

@@ -172,6 +172,7 @@ public class Model implements Runnable {
 			final CSVWriter writer = new CSVWriter();
 			StepHandler stepHandler = new StepHandler() {
 				double prevT = 0.0;
+				double totCH4 = 0.0;
 				
 			    public void init(double t0, double[] y0, double t) {
 			    }
@@ -183,10 +184,15 @@ public class Model implements Runnable {
 						double[] timemodel = new double[ode.getDimensions().length+1];
 						timemodel[0] = t;
 						
-						// We need to pull variables (S_h2 and acid-base) directly from the model if using DAE
+						// We need to pull variables directly from the model if using DAE
 						for (int i=1;i<timemodel.length;i++) {
 							timemodel[i] = ode.getDimensions()[i-1];
 						}
+						
+						// Total methane calculations, add methane produced in timestep onto total
+						totCH4 = totCH4 + timemodel[38]*resolution;
+						timemodel[43] = totCH4;
+										
 						// Append
 			        	writer.WriteArray(output_file, timemodel, true);
 			        	prevT = t;

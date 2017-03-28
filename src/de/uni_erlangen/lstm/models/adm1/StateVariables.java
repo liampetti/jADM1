@@ -45,7 +45,7 @@ public class StateVariables {
 	 * Digestor Influent
 	 */	
 	private double S_su, S_aa, S_fa, S_va, S_bu, S_pro, S_ac, S_h2, S_ch4, S_IC, S_IN, S_I, S_IP = 0.0;
-	private double X_xc, X_xch, X_xpr, X_xli, X_c, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I, X_PHA, X_PP, X_PAO = 0.0;
+	private double X_xc, X_xch, X_xpr, X_xli, tot_gas_ch4, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac, X_h2, X_I, X_PHA, X_PP, X_PAO = 0.0;
 	private double S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4, S_gas_co2 = 0.0;
 	private double Q_D, T_D, gas_ch4, gas_vol, ph = 0.0;
 	private double S_co2, S_nh4 = 0.0;
@@ -86,7 +86,7 @@ public class StateVariables {
 			S_IC, S_IN, S_I, X_xc, X_ch, X_pr, X_li, X_su, X_aa, X_fa, X_c4, X_pro, X_ac,
 			X_h2, X_I, S_cat, S_an, S_hva, S_hbu, S_hpro, S_hac, S_hco3, S_nh3, S_gas_h2, S_gas_ch4,
 			S_gas_co2, Q_D, T_D, gas_ch4, gas_vol, ph, S_co2, S_nh4,
-			X_c, X_xch, X_xpr, X_xli, S_IP, X_PHA, X_PP, X_PAO 
+			tot_gas_ch4, X_xch, X_xpr, X_xli, S_IP, X_PHA, X_PP, X_PAO 
 			};
 	}
 	
@@ -155,7 +155,7 @@ public class StateVariables {
 			ph=x[39];
 			S_co2=x[40];
 			S_nh4=x[41];
-			X_c=x[42];
+			tot_gas_ch4=x[42];
 			X_xch=x[43];
 			X_xpr=x[44];
 			X_xli=x[45];
@@ -482,11 +482,11 @@ public class StateVariables {
 	}
 
 	public double getX_c() {
-		return X_c;
+		return tot_gas_ch4;
 	}
 
 	public void setX_c(double x_c) {
-		X_c = x_c;
+		tot_gas_ch4 = x_c;
 	}
 
 	public double getX_PHA() {

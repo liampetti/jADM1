@@ -1,9 +1,9 @@
-#jADM1
+# jADM1
 A Java implementation of the Anaerobic Digestion Model No 1 (ADM1).
 
 Based on the Matlab code produced for the Benchmark Simulation Model No 2 (BSM2) produced by the International Water Association (IWA) Task Group on Benchmarking of Control Strategies for Wastewater Treatment Plants. The original ADM1 was developed by the IWA Task Group for Mathematical Modelling of Anaerobic Digestion Processes.
 
-Modifications have been made to the hydrolysis structures and composite material has been removed as a state variable. The original model that can be validated using the BSM2 Matlab code is 'jADM1_BSM'.
+Modifications have been made to the hydrolysis structures and composite material has been removed as a state variable. The original model that can be validated using the BSM2 Matlab code is [jADM1_BSM](https://github.com/liampetti/jADM1_BSM).
 
 This work has been created at:
 
@@ -11,13 +11,14 @@ Lehrstuhl für Strömungsmechanik,
 Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)
 
 
-Usage of this model can be found in the following conference papers:
+Usage of this model and more information regarding its modifications can be found in the following papers:
 
+* Pettigrew, L., Gutbrod, A., Domes, H., Groß, F., Méndez-Contreras, J.M., Delgado, A. (2017). Modified ADM1 for high-rate anaerobic co-digestion of thermally pre-treated brewery surplus yeast wastewater. Water Science and Technology (In Press). doi:10.2166/wst.2017.227
 * Pettigrew, L., Hubert, S., Groß, F., Delgado, A. (2015). Implementation of Dynamic Biological Process Models into a Reference Net Simulation Environment. In 16. ASIM Dedicated Conference Simulation in Production and Logistics. Dortmund: Fraunhofer IRB Verlag.
 * Pettigrew, L., Delgado, A. (2016). Neural Network Based Reinforcement Learning Control for Increased Methane Production in an Anaerobic Digestion System. In 3rd IWA Specialized International Conference „Ecotechnologies for Wastewater Treatment“ (ecoSTP16). Cambridge, UK.
 
 
-#Interface and Usage
+### Interface and Usage
 A command line interface can be used to run simulations with the following command line arguments:
 
 * -steady		  
@@ -154,16 +155,16 @@ CSV files contain the variable values in a ';' separated string. The influent fi
 >49) Phosphorus accumulating organisms (kg COD/m3) *** Not yet implemented ***
 
 
-#Dependencies
+### Dependencies
 * Requires the Apache Commons Mathematics Library 3.5
 
 
-#Credits
+### Credits
 
 Special thanks to Ulf Jeppsson, Christian Rosen and Darko Vrecko for use of their Matlab code of the ADM1, developed when (around 2004) they were all working together at the Department of Industrial Electrical Engineering and Automation (IEA), Lund University, Sweden.
 
 
-Referenced works:
+### Referenced works:
 
 * Batstone, D.J., Keller, J., Angelidaki, I., Kalyuzhnyi, S.V., Pavlostathis, S.G., Rozzi, A., Sanders, W.T.M., Siegrist, H. & Vavilin, V.A. (2002). Anaerobic Digestion Model No. 1 (ADM1). IWA Scientific and Technical Report No 13, IWA Publishing, London, UK.
 * Gernaey, K.V., Jeppsson, U., Vanrolleghem, P.A. & Copp, J.B. (2014). Benchmarking of Control Strategies for Wastewater Treatment Plants. IWA Scientific and Technical Report No. 23, IWA Publishing, London, UK.
@@ -171,7 +172,7 @@ Referenced works:
 * Flores-Alsina, X., Solon, K., Mbamba, C.K., Tait, S., Gernaey, K.V., Jeppsson, U., Batstone, D.J. (2016). Modelling Phosphorus (P), Sulfur (S) and Iron (Fe) Interactions for Dynamic Simulations of Anaerobic Digestion Processes. Water Research 95, 370–82.
 
 
-#License
+### License
 >Copyright 2016 Liam Pettigrew
 >
 > Licensed under the Apache License, Version 2.0 (the "License");

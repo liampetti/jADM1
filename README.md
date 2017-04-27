@@ -13,12 +13,13 @@ Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU)
 
 Usage of this model and more information regarding its modifications can be found in the following papers:
 
-* Pettigrew, L., Gutbrod, A., Domes, H., Groß, F., Méndez-Contreras, J.M., Delgado, A. (2017). Modified ADM1 for high-rate anaerobic co-digestion of thermally pre-treated brewery surplus yeast wastewater. Water Science and Technology (In Press). doi:10.2166/wst.2017.227
+* Pettigrew, L., Gutbrod, A., Domes, H., Groß, F., Méndez-Contreras, J.M., Delgado, A. (2017). Modified ADM1 for high-rate anaerobic co-digestion of thermally pre-treated brewery surplus yeast wastewater. Water Science and Technology (in press). doi:10.2166/wst.2017.227
 * Pettigrew, L., Hubert, S., Groß, F., Delgado, A. (2015). Implementation of Dynamic Biological Process Models into a Reference Net Simulation Environment. In 16. ASIM Dedicated Conference Simulation in Production and Logistics. Dortmund: Fraunhofer IRB Verlag.
 * Pettigrew, L., Delgado, A. (2016). Neural Network Based Reinforcement Learning Control for Increased Methane Production in an Anaerobic Digestion System. In 3rd IWA Specialized International Conference „Ecotechnologies for Wastewater Treatment“ (ecoSTP16). Cambridge, UK.
 
 
 ### Interface and Usage
+
 A command line interface can be used to run simulations with the following command line arguments:
 
 * -steady		  
@@ -156,6 +157,7 @@ CSV files contain the variable values in a ';' separated string. The influent fi
 
 
 ### Dependencies
+
 * Requires the Apache Commons Mathematics Library 3.5
 
 
@@ -173,7 +175,8 @@ Special thanks to Ulf Jeppsson, Christian Rosen and Darko Vrecko for use of thei
 
 
 ### License
->Copyright 2016 Liam Pettigrew
+
+> Copyright 2016 Liam Pettigrew
 >
 > Licensed under the Apache License, Version 2.0 (the "License");
 > you may not use this file except in compliance with the License.
